@@ -1,0 +1,12 @@
+logs/
+out/
+*testOutput/
+.idea/
+*.jar
+*.zip
+*.png
+*.jpeg
+*.jpg
+temp/
+test-output/
+target/

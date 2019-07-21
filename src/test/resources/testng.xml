@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="e2e Test Suite" verbose="5" configfailurepolicy="continue">
+    <test name="Automation tests" thread-count="2" parallel="methods">
+        <packages>
+            <package name="com.raj.framework.tests"/>
+        </packages>
+    </test>
+</suite>
