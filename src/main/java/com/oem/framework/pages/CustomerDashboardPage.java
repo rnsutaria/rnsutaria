@@ -2,6 +2,7 @@ package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 public class CustomerDashboardPage extends BasePage {
 
@@ -26,6 +27,13 @@ public class CustomerDashboardPage extends BasePage {
         setValue(companyName,"abc");
         setValue(companyRegisteredAddress,"Bangalore");
 
+
+    }
+
+
+    @Override
+    protected void isLoaded() throws Error {
+        Assert.assertTrue(isElementPresent(portfolioMgr),"Customer Dashboard Page didnt appear");
 
     }
 }

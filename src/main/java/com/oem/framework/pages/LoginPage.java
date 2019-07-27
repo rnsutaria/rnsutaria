@@ -2,8 +2,8 @@ package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
-import java.lang.invoke.MethodHandles;
 
 public class LoginPage extends BasePage {
 
@@ -19,12 +19,22 @@ public class LoginPage extends BasePage {
         return (LoginPage) threadLocalPage.get();
     }*/
 
-    public void loginUsing(String userName, String password){
+    public BasePage loginUsing(String userName, String password){
         driver.get("https://portal.oem-testing.com/Account/Login");
         setValue(username,userName);
         setValue(pwd,password);
         click(signInBtn);
+
+        //Failed login
+        if(isElementPresent(signInBtn))
+            return this;
+
+        return new AdminDashboardPage();
     }
 
 
+    @Override
+    protected void isLoaded() throws Error {
+        Assert.assertTrue(isElementPresent(pwd),"Login page didnt appear");
+    }
 }

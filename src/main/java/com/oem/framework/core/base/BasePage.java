@@ -2,16 +2,19 @@ package com.oem.framework.core.base;
 
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 
-public abstract class BasePage implements Base {
+public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<T> implements Base {
+
    // protected static ThreadLocal threadLocalPage=new ThreadLocal<>();
     protected final WebDriver driver;
     protected final String testName;
@@ -97,7 +100,6 @@ public abstract class BasePage implements Base {
     }
 
     public boolean isElementPresent(By locator) {
-        waitForElementPresent(locator);
         try {
             WebElement element = driver.findElement(locator);
             if (element == null)
@@ -108,6 +110,10 @@ public abstract class BasePage implements Base {
             return false;
         }
         return true;
+    }
+    @Override
+    protected void load() {
+
     }
 }
 

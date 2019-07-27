@@ -96,6 +96,14 @@
       <version>v4-rev493-1.23.0</version>
     </dependency>
 
+    <!--For loadable component-->
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>3.141.59</version>
+    </dependency>
+
 
   </dependencies>
 
