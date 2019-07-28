@@ -11,9 +11,10 @@ public class AdminDashboardPage extends BasePage {
 
 
 
-    public void impersonate(String email){
+    public CustomerDashboardPage impersonate(String email){
         setValue(impersonateUsername,email);
         click(impersonateBtn);
+        return new CustomerDashboardPage();
     }
 
 

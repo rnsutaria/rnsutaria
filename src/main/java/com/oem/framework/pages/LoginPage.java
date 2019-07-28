@@ -25,11 +25,15 @@ public class LoginPage extends BasePage {
         setValue(pwd,password);
         click(signInBtn);
 
-        //Failed login
-        if(isSignInPage())
-            return this;
 
-        return new AdminDashboardPage();
+        if(isAdminDashboardPage())
+            return new AdminDashboardPage();
+
+        if(isCustomerDashboardPage())
+            return new CustomerDashboardPage();
+
+        //Failed login
+        return this;
     }
 
 
@@ -38,10 +42,5 @@ public class LoginPage extends BasePage {
         Assert.assertTrue(isSignInPage(),"Login page didnt appear");
     }
 
-    private boolean isSignInPage(){
-        if(driver.getCurrentUrl().contains("Account/Login"))
-            return true;
-        return false;
 
-    }
 }

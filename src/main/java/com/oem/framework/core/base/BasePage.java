@@ -3,15 +3,13 @@ package com.oem.framework.core.base;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
+import org.testng.Assert;
 
 public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<T> implements Base {
 
@@ -40,7 +38,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
     public void waitForElementPresent(By locatn) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
             wait.until(ExpectedConditions.presenceOfElementLocated(locatn));
 
         } catch (Exception e) {
@@ -70,7 +68,10 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         }
     }
 
-
+    public String getText(By locator){
+        waitForElementPresent(locator);
+        return driver.findElement(locator).getText();
+    }
     public String getAttribute(By locator, String attributeName) {
         String attribute = "";
         waitForElementPresent(locator);
@@ -114,6 +115,33 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     @Override
     protected void load() {
 
+    }
+
+    protected boolean isCustomerDashboardPage(){
+        if(driver.getCurrentUrl().contains("CustomerDashboard"))
+            return true;
+        return false;
+    }
+
+    protected boolean isSignInPage(){
+        if(driver.getCurrentUrl().contains("Account/Login"))
+            return true;
+        return false;
+
+    }
+
+    protected boolean isAdminDashboardPage(){
+        if(driver.getCurrentUrl().contains("AdminDashboard"))
+            return true;
+        return false;
+    }
+
+    protected void verifyElementPresent(By element){
+        Assert.assertTrue(isElementPresent(element),"Element "+element +" doesn't exit");
+    }
+
+    public void sendSpecialKeys(By locator,Keys keys){
+        driver.findElement(locator).sendKeys(keys);
     }
 }
 
