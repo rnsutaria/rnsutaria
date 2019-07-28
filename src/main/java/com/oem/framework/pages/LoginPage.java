@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
         click(signInBtn);
 
         //Failed login
-        if(isElementPresent(signInBtn))
+        if(isSignInPage())
             return this;
 
         return new AdminDashboardPage();
@@ -35,6 +35,13 @@ public class LoginPage extends BasePage {
 
     @Override
     protected void isLoaded() throws Error {
-        Assert.assertTrue(isElementPresent(pwd),"Login page didnt appear");
+        Assert.assertTrue(isSignInPage(),"Login page didnt appear");
+    }
+
+    private boolean isSignInPage(){
+        if(driver.getCurrentUrl().contains("Account/Login"))
+            return true;
+        return false;
+
     }
 }

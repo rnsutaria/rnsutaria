@@ -3,6 +3,7 @@ package com.oem.framework.core.base;
 import com.oem.framework.core.DriverManager;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
+import com.oem.framework.core.utils.TestUtil;
 import com.oem.framework.pages.AdminDashboardPage;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
@@ -51,7 +52,10 @@ public abstract class BaseTest implements Base {
         System.out.println(String.format("Completed afterMethod processing for test: %s", testName));
         System.out.println(String.format("**********************************************************************************"));
 
-        cleanUpThread(Thread.currentThread().getId());
+        long threadId=Thread.currentThread().getId();
+
+        TestUtil.takeScreenshot(method.getName(), Globals.getTestExecutionContext(threadId).getDriver());
+        cleanUpThread(threadId);
 
     }
 

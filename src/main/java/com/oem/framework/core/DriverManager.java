@@ -56,15 +56,29 @@ public class DriverManager implements Base {
 
     public static String getDriverPath(){
         String osName = System.getProperty("os.name").toLowerCase();
-        String chromePath=Paths.get(DEFAULT_CHROME_DRIVER_DIR_PATH, new String[] { "v75", osName }).toString();
-        if(osName.equalsIgnoreCase("win"))
-            chromePath=chromePath+"chromedriver.exe";
-        else
-            chromePath=chromePath+"chromedriver";
+        String osPath="win";
+        if(osName.contains("win"))
+            osPath="win";
 
+        if(osName.contains("linux"))
+            osPath="linux";
+
+
+        if(osName.contains("mac"))
+            osPath="mac";
+
+        String chromePath=Paths.get(DEFAULT_CHROME_DRIVER_DIR_PATH, new String[] { "v75", osPath }).toString();
+        if(osName.contains("win"))
+            chromePath=Paths.get(chromePath,"chromedriver.exe").toString();
+        else
+            chromePath=Paths.get(chromePath,"chromedriver").toString();
+
+        System.out.println("Chrome driver path "+chromePath);
         return chromePath;
 
     }
+
+
 
     public static void shutDownService(){
         service.stop();

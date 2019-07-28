@@ -15,17 +15,12 @@ public class SanityTests extends BaseTest {
 
 
 
-    @BeforeMethod
-    public void beforeRun(){
 
-    }
     @Test
-    public void registerNewUserTest() throws InterruptedException {
+    public void loginUserTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage();
-        loginPage.loginUsing("anitha.bt@simpro.co.in","oemstaging");
+        loginPage= (LoginPage) loginPage.loginUsing("anitha.bt@simpro.co.in","oemstaging123");
       //  adminDashboardPage.impersonate("testcustomer012@openenergymarket.com");
-       //
-        // Thread.sleep(5000);
 
     }
 
