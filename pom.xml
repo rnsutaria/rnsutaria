@@ -112,6 +112,13 @@
       </exclusions>
     </dependency>
 
+
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.2.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -134,6 +141,7 @@
           <suiteXmlFiles>
             <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+
 
         </configuration>
       </plugin>
