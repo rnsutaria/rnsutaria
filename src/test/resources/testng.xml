@@ -1,9 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="e2e Test Suite" verbose="5" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
     <test name="Automation tests" thread-count="5" parallel="methods">
+
         <packages>
             <package name="com.oem.tests"/>
+
         </packages>
     </test>
 </suite>
