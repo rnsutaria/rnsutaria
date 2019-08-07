@@ -27,8 +27,6 @@ public class CustomerDashboardPage extends BasePage {
     protected void isLoaded() throws Error {
         System.out.println("Executing isLoaded in CustomerDashboard Page");
         Assert.assertTrue(isElementPresent(portfolioMgr),"Customer Dashboard Page didnt appear");
-
-
     }
 
     public void verifyPortfolioManagerElementExists(){

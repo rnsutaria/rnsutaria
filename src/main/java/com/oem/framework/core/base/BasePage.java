@@ -27,8 +27,16 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
     public void setValue(By by, String value){
         waitForElementPresent(by);
+        driver.findElement(by).clear();
         driver.findElement(by).sendKeys(value);
     }
+    
+    //clearValue
+    public void clearValue(By by) {
+    	waitForElementPresent(by);
+        driver.findElement(by).clear();
+    }
+    
 
     public void click(By by){
         waitForElementPresent(by);
@@ -141,7 +149,8 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     }
 
     public void sendSpecialKeys(By locator,Keys keys){
-        driver.findElement(locator).sendKeys(keys);
+        driver.findElement(locator).clear();
+    	driver.findElement(locator).sendKeys(keys);
     }
 }
 
