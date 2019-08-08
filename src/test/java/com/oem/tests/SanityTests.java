@@ -122,5 +122,5 @@ public class SanityTests extends BaseTest {
 				"Company registration number field is required");
 	}
 	
-	
+//	
 }
