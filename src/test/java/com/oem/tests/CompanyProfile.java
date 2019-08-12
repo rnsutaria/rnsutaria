@@ -120,6 +120,6 @@ public class CompanyProfile extends BaseTest {
 		companyProfilePage.click(By.id("submit"));
 		companyProfilePage.verifyCompRegistrationNumberError(
 				"Company registration number field is required");
-	}
+	} 
 	
 }
