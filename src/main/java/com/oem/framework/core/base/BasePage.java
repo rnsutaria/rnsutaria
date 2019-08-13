@@ -3,6 +3,8 @@ package com.oem.framework.core.base;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
+import java.util.List;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
@@ -107,6 +109,14 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(locator);
         new Select(driver.findElement(locator)).selectByValue(value);
     }
+    
+    public void displayDropdownOptions(By element)
+	{
+		Select sel = new Select((WebElement) element);
+		List<WebElement> lst = sel.getOptions();
+		for(WebElement wb : lst)
+			System.out.println(wb.getText());
+	}
 
     public boolean isElementPresent(By locator) {
         try {

@@ -121,5 +121,15 @@ public class CompanyProfile extends BaseTest {
 		companyProfilePage.verifyCompRegistrationNumberError(
 				"Company registration number field is required");
 	} 
+	@Test
+	public void PM_CP_TC_019()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.displayDropdownOptions(By.id("InvoiceHeadOffice"));
+		companyProfilePage.selectByVisibleText(By.id("InvoiceHeadOffice"), "Head Office");
+	}
 	
 }
