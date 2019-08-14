@@ -6,9 +6,10 @@ import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class CompanyProfile extends BaseTest {
+public class CompanyProfileTest extends BaseTest {
 
 	@Test
 	public void PM_CP_TC_003() {
@@ -120,16 +121,35 @@ public class CompanyProfile extends BaseTest {
 		companyProfilePage.click(By.id("submit"));
 		companyProfilePage.verifyCompRegistrationNumberError(
 				"Company registration number field is required");
-	} 
+	}
 	@Test
-	public void PM_CP_TC_019()
+	public void PM_CP_TC_026()
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.displayDropdownOptions(By.id("InvoiceHeadOffice"));
-		companyProfilePage.selectByVisibleText(By.id("InvoiceHeadOffice"), "Head Office");
+		companyProfilePage.verifyLOATemplateDisplay("Letter of Authority Template");
+	}
+	@Test
+	public void PM_CP_TC_027()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.verifyExistingLOADisplay("Download Existing Letter Of Authority");
+	}
+	@Test
+	public void PM_CP_TC_028()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.click(By.id("LOAExpiresDate"));
+		//companyProfilePage.verifyElementPresent(By.xpath("//div[@id = 'ui-datepicker-div']"));
+		companyProfilePage.verifyExistingLOADisplay("Download Existing Letter Of Authority");
 	}
 	
 }

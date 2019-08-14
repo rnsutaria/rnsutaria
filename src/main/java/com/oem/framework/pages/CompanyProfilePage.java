@@ -1,8 +1,12 @@
 package com.oem.framework.pages;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class CompanyProfilePage extends CustomerDashboardPage {
@@ -18,6 +22,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By phone = By.id("ContactPhone");
     By companyRegNum = By.id("CompanyRegistrationNumber");
     By companyRegNumError = By.id("CompanyRegistrationNumber-error");
+    By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
+    By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
+    By LOAExpiresDate = By.id("LOAExpiresDate");
+    By LOAExpiresDateDatePicker = By.xpath("//div[@id = 'ui-datepicker-div']");
     
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
@@ -85,9 +93,31 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     }
     
+    public void displayDropdownOptions(WebElement element)
+	{
+		Select sel = new Select(element);
+		List<WebElement> lst = sel.getOptions();
+		for(WebElement wb : lst)
+			System.out.println(wb.getText());
+	}
+    
+    public void verifyLOATemplateDisplay(String value)
+    {
+    	Assert.assertTrue(StringUtils.isNoneBlank(getText(loaTemplate)) &&
+                getText(loaTemplate).trim().contains(value),"Letter of Authority Template"+getText(loaTemplate) +" but expected:"+value);
+    }
+    public void verifyExistingLOADisplay(String value)
+    {
+    	Assert.assertTrue(StringUtils.isNoneBlank(getText(existingLOA)) &&
+                getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);
+    }
+    public void verifyDatePickerDisplayLOAExpiresDate()
+    {
+    	
+    	//Assert.assertTrue(verifyElementPresent(LOAExpiresDateDatePicker), "Date Picker didn't display");
+    }
     
     
-
     public enum CompanyProfileFields
     {
         NAME, RegisteredAddress,PostCode,Phone,RegistrationNumber,

@@ -110,13 +110,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         new Select(driver.findElement(locator)).selectByValue(value);
     }
     
-    public void displayDropdownOptions(By element)
-	{
-		Select sel = new Select((WebElement) element);
-		List<WebElement> lst = sel.getOptions();
-		for(WebElement wb : lst)
-			System.out.println(wb.getText());
-	}
+    
 
     public boolean isElementPresent(By locator) {
         try {
