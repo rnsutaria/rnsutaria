@@ -29,5 +29,17 @@ public class SanityTests extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
 
-	}	
+	}
+	@Test
+	public void PM_CP_TC_030() throws InterruptedException
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.click(By.id("LOAExpiresDate"));
+		//companyProfilePage.verifyElementPresent(By.xpath("//div[@id = 'ui-datepicker-div']"));
+		companyProfilePage.selectPrevDateCalender();
+		Thread.sleep(3000);
+	}
 }

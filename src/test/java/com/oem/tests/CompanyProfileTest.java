@@ -86,30 +86,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.verifyBlankPostcodeError(
 				"Postcode field is required");
 	}
-	@Test
-	public void PM_CP_TC_031()
-	{
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.RegisteredAddress, "     ");
-		companyProfilePage.click(By.id("submit"));
-		companyProfilePage.verifyBlankRegisteredAddressError(
-				"Registered address field is required");		
-	}
-	@Test
-	public void PM_CP_TC_032()
-	{
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.PostCode, "     ");
-		companyProfilePage.click(By.id("submit"));
-		companyProfilePage.verifyBlankPostcodeError(
-				"Postcode field is required");
-	}
+	
 	@Test
 	public void PM_CP_TC_015()
 	{
@@ -148,8 +125,50 @@ public class CompanyProfileTest extends BaseTest {
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.click(By.id("LOAExpiresDate"));
-		//companyProfilePage.verifyElementPresent(By.xpath("//div[@id = 'ui-datepicker-div']"));
-		companyProfilePage.verifyExistingLOADisplay("Download Existing Letter Of Authority");
+		companyProfilePage.verifyDatePickerDisplayLOAExpiresDate();
 	}
-	
+	@Test
+	public void PM_CP_TC_029()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.click(By.id("LOAExpiresDate"));
+		companyProfilePage.selectFutureDateCalender();
+	}
+	@Test
+	public void PM_CP_TC_030() throws InterruptedException
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.click(By.id("LOAExpiresDate"));
+		companyProfilePage.selectPrevDateCalender();
+	}
+	@Test
+	public void PM_CP_TC_031()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.RegisteredAddress, "     ");
+		companyProfilePage.click(By.id("submit"));
+		companyProfilePage.verifyBlankRegisteredAddressError(
+				"Registered address field is required");		
+	}
+	@Test
+	public void PM_CP_TC_032()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.PostCode, "     ");
+		companyProfilePage.click(By.id("submit"));
+		companyProfilePage.verifyBlankPostcodeError(
+				"Postcode field is required");
+	}
 }

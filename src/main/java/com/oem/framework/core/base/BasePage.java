@@ -156,5 +156,39 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         driver.findElement(locator).clear();
     	driver.findElement(locator).sendKeys(keys);
     }
+    
+    public void selectFutureDateCalender()
+	{
+		int count = 0;
+		while(count<=60) 
+		{
+			try {
+				driver.findElement(By.xpath("//td[@data-month = '8' and @data-year = '2019']/a[text() = '25']")).click();//Sep 25, 2019
+				break;
+			}
+			catch(Exception e)
+			{
+				driver.findElement(By.xpath("//a[@data-handler = 'next']/span[text() = 'Next']")).click();
+				count++;
+			}
+		}
+	}
+    
+    public void selectPrevDateCalender() throws InterruptedException
+	{
+		int count = 0;
+		while(count<=60) 
+		{
+			try {
+				driver.findElement(By.xpath("//td[@data-month = '2' and @data-year = '2016']/a[text() = '7']")).click();//March 7, 2016
+				break;
+			}
+			catch(Exception e)
+			{
+				driver.findElement(By.xpath("//a[@data-handler = 'prev']/span[text() = 'Prev']")).click();
+				count++;
+			}
+		}
+	}
 }
 

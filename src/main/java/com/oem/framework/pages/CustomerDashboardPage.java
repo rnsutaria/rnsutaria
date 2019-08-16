@@ -8,6 +8,7 @@ public class CustomerDashboardPage extends BasePage {
 
     By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
     By companyProfile=By.linkText("Company Profile");
+    By portfolioCalendar = By.linkText("Portfolio Calendar");
 
 
 
@@ -15,6 +16,14 @@ public class CustomerDashboardPage extends BasePage {
     public CustomerDashboardPage goToCompanyProfile(){
         click(portfolioMgr);
         click(companyProfile);
+        CompanyProfilePage companyProfilePage=new CompanyProfilePage();
+        companyProfilePage.isLoaded();
+        return companyProfilePage;
+    }
+    
+    public CustomerDashboardPage goToPortfolioCalendar(){
+        click(portfolioMgr);
+        click(portfolioCalendar);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
         companyProfilePage.isLoaded();
         return companyProfilePage;

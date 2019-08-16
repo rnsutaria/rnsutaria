@@ -112,10 +112,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);
     }
     public void verifyDatePickerDisplayLOAExpiresDate()
-    {
-    	
-    	//Assert.assertTrue(verifyElementPresent(LOAExpiresDateDatePicker), "Date Picker didn't display");
+    {    	
+    	Assert.assertEquals(driver.findElement(By.id("ui-datepicker-div")).isDisplayed(), true);
     }
+    
     
     
     public enum CompanyProfileFields
