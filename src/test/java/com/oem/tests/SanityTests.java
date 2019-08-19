@@ -31,15 +31,11 @@ public class SanityTests extends BaseTest {
 
 	}
 	@Test
-	public void PM_CP_TC_030() throws InterruptedException
-	{
+	public void PM_CP_TC_003() {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.click(By.id("LOAExpiresDate"));
-		//companyProfilePage.verifyElementPresent(By.xpath("//div[@id = 'ui-datepicker-div']"));
-		companyProfilePage.selectPrevDateCalender();
-		Thread.sleep(3000);
+		customerDashboardPage.verifyPortfolioManagerElementExists();
+
 	}
 }

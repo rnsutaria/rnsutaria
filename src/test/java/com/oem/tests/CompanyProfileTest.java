@@ -172,3 +172,5 @@ public class CompanyProfileTest extends BaseTest {
 				"Postcode field is required");
 	}
 }
+
+ 

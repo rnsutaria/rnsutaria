@@ -24,9 +24,9 @@ public class CustomerDashboardPage extends BasePage {
     public CustomerDashboardPage goToPortfolioCalendar(){
         click(portfolioMgr);
         click(portfolioCalendar);
-        CompanyProfilePage companyProfilePage=new CompanyProfilePage();
-        companyProfilePage.isLoaded();
-        return companyProfilePage;
+        PortfolioCalendarPage portfolioCalendarPage=new PortfolioCalendarPage();
+        portfolioCalendarPage.isLoaded();
+        return portfolioCalendarPage;
     }
 
 
