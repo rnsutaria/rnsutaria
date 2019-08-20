@@ -8,7 +8,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	
 	By addCalendarEntry = By.id("new-entry-btn");
 	By portfolioCalendarEntryPopUp = By.xpath("//h3[text() = 'Add new portfolio calendar entry']");
-	
+	By close_PortfolioCalendarEntryPopup = By.xpath("//div[@id='add-calendar-entry']//button[@class='close icon-close']");
 	
 	
 	@Override
@@ -16,11 +16,15 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
         System.out.println("Executing isLoaded in CustomerDashboard Page");
         Assert.assertTrue(isElementPresent(addCalendarEntry),"Portfolio Calendar Page didnt appear");
         
-
     }
-	public void verifyRegisteredAddressError(String value){
+	public void verifyPortfolioCalendarEntrypopup(String value){
 		
         Assert.assertTrue(StringUtils.isNoneBlank(getText(portfolioCalendarEntryPopUp)) &&
-                getText(portfolioCalendarEntryPopUp).trim().contains(value),"Registered address error actual value: "+getText(portfolioCalendarEntryPopUp) +" but expected:"+value);
+                getText(portfolioCalendarEntryPopUp).trim().contains(value),"Portfolio Calendar Entry Popup heading actual value: "+getText(portfolioCalendarEntryPopUp) +" but expected:"+value);
+    }
+	public void verifyCloseBtnPortfolioCalendarEntrypopup(){
+		
+		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
+		Assert.assertEquals(status, false);
     }
 }

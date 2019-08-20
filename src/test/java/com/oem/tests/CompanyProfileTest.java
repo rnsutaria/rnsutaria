@@ -21,7 +21,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void TC_003_4() {
+	public void PM_CP_TC_017() {
 
 		LoginPage loginPage = new LoginPage();
 
