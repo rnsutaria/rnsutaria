@@ -27,10 +27,11 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.xpath("//div[@id = 'ui-datepicker-div']");
     
+    //CompanyProfilePage cp = new CompanyProfilePage();
+    
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
-        setValue(companyRegisteredAddress,"Bangalore");
-        
+        setValue(companyRegisteredAddress,"Bangalore");      
     }
 
 
@@ -64,31 +65,41 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
 
     public void verifyRegisteredAddressError(String value){
-
-        Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
+        cp.click(saveBtn);
+    	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
                 getText(registeredAddressError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressError) +" but expected:"+value);
     }
     
     public void verifyBlankRegisteredAddressError(String value) {
-    	
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(companyRegisteredAddress, "");
+        cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     }
 
     public void verifyCompanyNameError(String value) {
-    	
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(companyName, "");
+        cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
     }
     
     public void verifyBlankPostcodeError(String value) {
-    	
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(compPostCode, "");
+        cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
     }
     
     public void verifyCompRegistrationNumberError(String value) {
-    	
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(companyRegNum, "");
+        cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     }
@@ -112,8 +123,11 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);
     }
     public void verifyDatePickerDisplayLOAExpiresDate()
-    {    	
-    	Assert.assertEquals(driver.findElement(By.id("ui-datepicker-div")).isDisplayed(), true);
+    {   
+    	CompanyProfilePage cp = new CompanyProfilePage();
+        cp.click(LOAExpiresDate);
+        cp.isElementPresent(LOAExpiresDateDatePicker);
+    	Assert.assertEquals(cp.isElementPresent(LOAExpiresDateDatePicker), true);
     }
     
     
