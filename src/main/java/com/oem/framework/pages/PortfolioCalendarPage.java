@@ -53,8 +53,16 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		Thread.sleep(2000);
 		pc.click(eventDate);
 		pc.selectFutureDateCalender();
-		pc.setValue(eventDescription, "");
-		pc.click(saveBtn);
+		
+		String str = driver.findElement(By.xpath("NewCalendarEntry_EventDate")).getAttribute(value);
+		System.out.println("value at date field "+ str);
+		
+		pc.setValue(eventDescription, "lorem ipsum");
+		
+		str = driver.findElement(By.id("NewCalendarEntry_EventDescription")).getAttribute(value);
+		System.out.println("value at description : " + str);
+		
+		//pc.click(saveBtn);
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(eventDescriptionErrorMessage)) &&
                 getText(eventDescriptionErrorMessage).trim().contains(value),"Event Description Error message actual value: "+getText(eventDescriptionErrorMessage) +" but expected:"+value);
 	}

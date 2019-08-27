@@ -12,6 +12,7 @@ import org.testng.Assert;
 public class CompanyProfilePage extends CustomerDashboardPage {
 
 	By saveBtn = By.id("submit");
+	By saveSuccessMsg = By.xpath("//div[@id = 'global-message-text']");
     By companyName=By.id("Name");
     By companyRegisteredAddress=By.id("RegisteredAddress");
     By compPostCode=By.id("Postcode");
@@ -22,6 +23,8 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By phone = By.id("ContactPhone");
     By companyRegNum = By.id("CompanyRegistrationNumber");
     By companyRegNumError = By.id("CompanyRegistrationNumber-error");
+    By CompanyLogo = By.id("CompanyLogo");
+    By supplierInvoicingTo = By.id("InvoiceHeadOffice");
     By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
     By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
     By LOAExpiresDate = By.id("LOAExpiresDate");
@@ -90,7 +93,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     
     public void verifyBlankPostcodeError(String value) {
     	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(compPostCode, "");
+    	//cp.setValue(compPostCode, "");
         cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
@@ -127,7 +130,38 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	CompanyProfilePage cp = new CompanyProfilePage();
         cp.click(LOAExpiresDate);
         cp.isElementPresent(LOAExpiresDateDatePicker);
-    	Assert.assertEquals(cp.isElementPresent(LOAExpiresDateDatePicker), true);
+    	Assert.assertEquals(cp.isElementPresent(LOAExpiresDateDatePicker), true);	
+    }
+    public void uploadLogo()
+    {   
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
+    	cp.click(saveBtn);
+    	boolean status = cp.isElementPresent(saveSuccessMsg);
+        Assert.assertEquals(true, status);
+    }
+    public void verifySupplierInvoiceTo()
+    {
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	Select sel = new Select((WebElement) supplierInvoicingTo);
+		List<WebElement> lst = sel.getOptions();
+		for(WebElement wb : lst)
+			System.out.println(wb.getText());
+    }
+    public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
+    {
+    	CompanyProfilePage cp = new CompanyProfilePage();
+        cp.setValue(companyName, compName);
+        cp.setValue(companyRegisteredAddress, addr);
+        cp.setValue(compPostCode, postCode);
+        cp.setValue(phone, ph);
+        cp.setValue(companyRegNum, regdNo);
+        cp.click(saveBtn);
+        Thread.sleep(2000);
+        boolean status = cp.isElementPresent(saveSuccessMsg);
+        Assert.assertEquals(true, status);
+    	/*Assert.assertTrue(StringUtils.isNoneBlank(getText(existingLOA)) &&
+                getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);*/
     }
     
     

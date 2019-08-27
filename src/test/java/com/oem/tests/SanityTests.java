@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class SanityTests extends BaseTest {
 
-	@Test
+	/*@Test
 	public void PortfolioManagerDisplaysTest() {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -29,16 +29,15 @@ public class SanityTests extends BaseTest {
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
-	}
+	}*/
+	
 	@Test
-	public void PM_CP_TC_028()
-	{
+	public void PM_PC_TC_008() throws Exception {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.click(By.id("LOAExpiresDate"));
-		companyProfilePage.verifyDatePickerDisplayLOAExpiresDate();
+		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
+		portfolioCalendarPage.validateEventDescriptionPortfolioCaledarEntryPopup("The Event Description * field is required.");
 	}
 	
 }
