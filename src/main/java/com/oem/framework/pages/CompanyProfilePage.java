@@ -82,6 +82,12 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     }
+    public void verifyRegisteredAddressErrorSpaceTestData() {
+    	CompanyProfilePage cp = new CompanyProfilePage();
+    	cp.setValue(companyRegisteredAddress, "       ");
+        cp.click(saveBtn);
+        Assert.assertEquals(true, cp.isElementPresent(registeredAddressBlankError));
+    }
 
     public void verifyCompanyNameError(String value) {
     	CompanyProfilePage cp = new CompanyProfilePage();
@@ -94,6 +100,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     public void verifyBlankPostcodeError(String value) {
     	CompanyProfilePage cp = new CompanyProfilePage();
     	//cp.setValue(compPostCode, "");
+    	cp.setValue(compPostCode, "    ");
         cp.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
@@ -159,9 +166,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         cp.click(saveBtn);
         Thread.sleep(2000);
         boolean status = cp.isElementPresent(saveSuccessMsg);
-        Assert.assertEquals(true, status);
-    	/*Assert.assertTrue(StringUtils.isNoneBlank(getText(existingLOA)) &&
-                getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);*/
+        Assert.assertEquals(true, status);   	
     }
     
     

@@ -154,9 +154,7 @@ public class CompanyProfileTest extends BaseTest {
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.RegisteredAddress, "     ");
-		companyProfilePage.click(By.id("submit"));
-		companyProfilePage.verifyBlankRegisteredAddressError("Registered address field is required");
+		companyProfilePage.verifyRegisteredAddressErrorSpaceTestData();
 	}
 
 	@Test
@@ -165,7 +163,6 @@ public class CompanyProfileTest extends BaseTest {
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.setFieldValue(CompanyProfilePage.CompanyProfileFields.PostCode, "     ");
 		companyProfilePage.verifyBlankPostcodeError("Postcode field is required");
 	}
 
