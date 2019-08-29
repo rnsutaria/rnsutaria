@@ -41,105 +41,105 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
         
     }
 	public void verifyPortfolioCalendarEntrypopup(String value) throws InterruptedException{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(addCalendarEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(addCalendarEntry);
 		Thread.sleep(1000);
         Assert.assertTrue(StringUtils.isNoneBlank(getText(portfolioCalendarEntryPopUp)) &&
                 getText(portfolioCalendarEntryPopUp).trim().contains(value),"Portfolio Calendar Entry Popup heading actual value: "+getText(portfolioCalendarEntryPopUp) +" but expected:"+value);
     }
 	public void verifyCloseBtnPortfolioCalendarEntrypopup() throws InterruptedException{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(addCalendarEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(addCalendarEntry);
 		Thread.sleep(1000);
-		pc.click(close_PortfolioCalendarEntryPopup);
+		portfolioCalendarPage.click(close_PortfolioCalendarEntryPopup);
 		Thread.sleep(1000);
 		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
 		Assert.assertEquals(status, false);
     }
 	public void verifyspaceDataPortfolioCaledarEntryPopup(String data) throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(addCalendarEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(addCalendarEntry);
 		Thread.sleep(2000);
-		pc.click(eventDate);
-		pc.selectFutureDateCalender();
-		pc.setValue(eventDescription, data);
-		pc.click(saveBtn);
+		portfolioCalendarPage.click(eventDate);
+		portfolioCalendarPage.selectFutureDateCalender();
+		portfolioCalendarPage.setValue(eventDescription, data);
+		portfolioCalendarPage.click(saveBtn);
 	}
 	public void validateEventDescriptionPortfolioCaledarEntryPopup(String value) throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(addCalendarEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(addCalendarEntry);
 		Thread.sleep(2000);
-		pc.click(eventDate);
-		pc.selectFutureDateCalender();
-		pc.setValue(eventDescription, "");
-		pc.click(saveBtn);
+		portfolioCalendarPage.click(eventDate);
+		portfolioCalendarPage.selectFutureDateCalender();
+		portfolioCalendarPage.setValue(eventDescription, "");
+		portfolioCalendarPage.click(saveBtn);
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(eventDescriptionErrorMessage)) &&
                 getText(eventDescriptionErrorMessage).trim().contains(value),"Event Description Error message actual value: "+getText(eventDescriptionErrorMessage) +" but expected:"+value);
 	}
 	public void validateDeleteEventPopup(String value)
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(deleteEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(deleteEntry);
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(delete_popup)) &&
                 getText(delete_popup).trim().contains(value),"Delete event popup message: "+getText(delete_popup) +" but expected:"+value);
 	}
 	public void validateCancelBtnDeleteEventPopup() throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(deleteEntry);
-		pc.click(delete_CancelBtn);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(deleteEntry);
+		portfolioCalendarPage.click(delete_CancelBtn);
 		Thread.sleep(1000);
-		boolean status = pc.isElementPresent(delete_popup);
+		boolean status = portfolioCalendarPage.isElementPresent(delete_popup);
 		System.out.println("Is delete popup displaying: " + status);
 		Assert.assertEquals(false, status);		
 	}
 	public void validateDeleteEvent() throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		String date = pc.getText(eventDate_firstRecord);
-		String desc = pc.getText(eventDes_firstRecord);
-		pc.click(deleteEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		String date = portfolioCalendarPage.getText(eventDate_firstRecord);
+		String desc = portfolioCalendarPage.getText(eventDes_firstRecord);
+		portfolioCalendarPage.click(deleteEntry);
 		Reporter.log("clicked 'Delete Entry' button for first row");
-		pc.click(delete_OkBtn);
+		portfolioCalendarPage.click(delete_OkBtn);
 		Reporter.log("clicked Ok button in delete popup");
 		Thread.sleep(2000);
-		boolean status = desc.equals(pc.getText(eventDes_firstRecord)) && date.equals(pc.getText(eventDate_firstRecord));
+		boolean status = desc.equals(portfolioCalendarPage.getText(eventDes_firstRecord)) && date.equals(portfolioCalendarPage.getText(eventDate_firstRecord));
 		Reporter.log("compared description and date in the first row before delete and after deleting an event");		
 		Assert.assertEquals(false, status);
 	}
 	public void validateEditEventPopup(String value)
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(editEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(editEntry);
 		Reporter.log("clicked 'Edit Entry' button for first row");
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(edit_popup)) &&
                 getText(edit_popup).trim().contains(value),"Edit event popup heading: "+getText(edit_popup) +" but expected:"+value);
 	}
 	public void validateCloseIconEditEventPopup() throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		pc.click(editEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		portfolioCalendarPage.click(editEntry);
 		Reporter.log("clicked 'Edit Entry' button for first row");
 		Thread.sleep(1000);
-		pc.click(close_PortfolioCalendarEntryPopup);
+		portfolioCalendarPage.click(close_PortfolioCalendarEntryPopup);
 		Reporter.log("Clicked close icon in edit entry popup");
 		Thread.sleep(2000);
-		boolean status = pc.isElementPresent(edit_popup);
+		boolean status = portfolioCalendarPage.isElementPresent(edit_popup);
 		System.out.println("Is edit popup displaying: " + status);
 		Reporter.log("Checked if edit popup is still displaying");
 		Assert.assertEquals(false, status);		
 	}
 	public void validateEditEventChangingDate() throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		String desc = pc.getText(eventDes_firstRecord);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		String desc = portfolioCalendarPage.getText(eventDes_firstRecord);
 		Reporter.log("captured description in first record");
-		pc.click(editEntry);
+		portfolioCalendarPage.click(editEntry);
 		Reporter.log("clicked 'Edit Entry' button for first row");
 		Thread.sleep(1000);
-		pc.click(eventDate);
+		portfolioCalendarPage.click(eventDate);
 		int count = 0;
 		while(count<=60) 
 		{
@@ -154,34 +154,26 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 			}
 		}
 		Reporter.log("Entered date in date picker");
-		pc.click(saveBtn);
+		portfolioCalendarPage.click(saveBtn);
 		Reporter.log("Clicked save entry button");
-		boolean status = pc.getText(eventDate_firstRecord).equals("20/03/2017") && pc.getText(eventDes_firstRecord).equals(desc);
+		boolean status = portfolioCalendarPage.getText(eventDate_firstRecord).equals("20/03/2017") && portfolioCalendarPage.getText(eventDes_firstRecord).equals(desc);
 		Reporter.log("compared date and description editing");
 		Assert.assertEquals(true, status);
 	}
 	public void validateEditEventChangingDescription() throws InterruptedException
 	{
-		PortfolioCalendarPage pc = new PortfolioCalendarPage();
-		String date = pc.getText(eventDate_firstRecord);
-		pc.click(editEntry);
+		PortfolioCalendarPage portfolioCalendarPage = new PortfolioCalendarPage();
+		String date = portfolioCalendarPage.getText(eventDate_firstRecord);
+		portfolioCalendarPage.click(editEntry);
 		Reporter.log("Clicked on edit entry");
 		Thread.sleep(1000);
-		pc.setValue(eventDescription, "Bank holiday");
+		portfolioCalendarPage.setValue(eventDescription, "Bank holiday");
 		Reporter.log("Entered data in event description");
-		pc.click(saveBtn);
+		portfolioCalendarPage.click(saveBtn);
 		Reporter.log("clicked save button");
 		Thread.sleep(1000);
-		boolean status = pc.getText(eventDes_firstRecord).equals("Bank holiday") && pc.getText(eventDate).equals(date);
+		boolean status = portfolioCalendarPage.getText(eventDes_firstRecord).equals("Bank holiday") && portfolioCalendarPage.getText(eventDate).equals(date);
 		Reporter.log("Compared data in event date and description after editing");
 	}
-	/*public void readData() throws Throwable
-	{
-		FileInputStream fObj = new FileInputStream("./data/testScriptData.xlsx");
-		Workbook wb = WorkbookFactory.create(fObj);
-		Sheet sh = wb.getSheet("Sheet1");
-		Row row = sh.getRow(9);
-		String data = row.getCell(0).getStringCellValue();
-		System.out.println(data);
-	}*/
+	
 }

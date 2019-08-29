@@ -30,7 +30,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.xpath("//div[@id = 'ui-datepicker-div']");
     
-    //CompanyProfilePage cp = new CompanyProfilePage();
+    //CompanyProfilePage companyProfilePage = new CompanyProfilePage();
     
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
@@ -68,48 +68,48 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
 
     public void verifyRegisteredAddressError(String value){
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
+        companyProfilePage.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
                 getText(registeredAddressError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressError) +" but expected:"+value);
     }
     
     public void verifyBlankRegisteredAddressError(String value) {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(companyRegisteredAddress, "");
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(companyRegisteredAddress, "");
+        companyProfilePage.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     }
     public void verifyRegisteredAddressErrorSpaceTestData() {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(companyRegisteredAddress, "       ");
-        cp.click(saveBtn);
-        Assert.assertEquals(true, cp.isElementPresent(registeredAddressBlankError));
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(companyRegisteredAddress, "       ");
+        companyProfilePage.click(saveBtn);
+        Assert.assertEquals(true, companyProfilePage.isElementPresent(registeredAddressBlankError));
     }
 
     public void verifyCompanyNameError(String value) {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(companyName, "");
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(companyName, "");
+        companyProfilePage.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
     }
     
     public void verifyBlankPostcodeError(String value) {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	//cp.setValue(compPostCode, "");
-    	cp.setValue(compPostCode, "    ");
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	//companyProfilePage.setValue(compPostCode, "");
+    	companyProfilePage.setValue(compPostCode, "    ");
+        companyProfilePage.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
     }
     
     public void verifyCompRegistrationNumberError(String value) {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(companyRegNum, "");
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(companyRegNum, "");
+        companyProfilePage.click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     }
@@ -134,22 +134,22 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void verifyDatePickerDisplayLOAExpiresDate()
     {   
-    	CompanyProfilePage cp = new CompanyProfilePage();
-        cp.click(LOAExpiresDate);
-        cp.isElementPresent(LOAExpiresDateDatePicker);
-    	Assert.assertEquals(cp.isElementPresent(LOAExpiresDateDatePicker), true);	
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+        companyProfilePage.click(LOAExpiresDate);
+        companyProfilePage.isElementPresent(LOAExpiresDateDatePicker);
+    	Assert.assertEquals(companyProfilePage.isElementPresent(LOAExpiresDateDatePicker), true);	
     }
     public void uploadLogo()
     {   
-    	CompanyProfilePage cp = new CompanyProfilePage();
-    	cp.setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
-    	cp.click(saveBtn);
-    	boolean status = cp.isElementPresent(saveSuccessMsg);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+    	companyProfilePage.setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
+    	companyProfilePage.click(saveBtn);
+    	boolean status = companyProfilePage.isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);
     }
     public void verifySupplierInvoiceTo()
     {
-    	CompanyProfilePage cp = new CompanyProfilePage();
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
     	Select sel = new Select((WebElement) supplierInvoicingTo);
 		List<WebElement> lst = sel.getOptions();
 		for(WebElement wb : lst)
@@ -157,15 +157,15 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
-    	CompanyProfilePage cp = new CompanyProfilePage();
-        cp.setValue(companyName, compName);
-        cp.setValue(companyRegisteredAddress, addr);
-        cp.setValue(compPostCode, postCode);
-        cp.setValue(phone, ph);
-        cp.setValue(companyRegNum, regdNo);
-        cp.click(saveBtn);
+    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+        companyProfilePage.setValue(companyName, compName);
+        companyProfilePage.setValue(companyRegisteredAddress, addr);
+        companyProfilePage.setValue(compPostCode, postCode);
+        companyProfilePage.setValue(phone, ph);
+        companyProfilePage.setValue(companyRegNum, regdNo);
+        companyProfilePage.click(saveBtn);
         Thread.sleep(2000);
-        boolean status = cp.isElementPresent(saveSuccessMsg);
+        boolean status = companyProfilePage.isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);   	
     }
     

@@ -3,8 +3,16 @@ package com.oem.framework.core.base;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
@@ -26,14 +34,22 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         driver = testExecutionContext.getDriver();
         testName = testExecutionContext.getTestName();
     }
-
+    
+    /**
+     * Set value of the webelement by passing locator and value
+     * @param by
+     * @param value
+     */
     public void setValue(By by, String value){
         waitForElementPresent(by);
         driver.findElement(by).clear();
         driver.findElement(by).sendKeys(value);
     }
     
-    //clearValue
+    /**
+     * clear data present in the webelement
+     * @param by
+     */
     public void clearValue(By by) {
     	waitForElementPresent(by);
         driver.findElement(by).clear();
@@ -151,12 +167,18 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     protected void verifyElementPresent(By element){
         Assert.assertTrue(isElementPresent(element),"Element "+element +" doesn't exit");
     }
-
+    /**
+     * Used to enter data into a webelement based by passing locator and data as arguments
+     * @param locator
+     * @param keys
+     */
     public void sendSpecialKeys(By locator,Keys keys){
         driver.findElement(locator).clear();
     	driver.findElement(locator).sendKeys(keys);
     }
-    
+    /**
+     * Used to select future date from date picker. Here date is hardcoded.
+     */
     public void selectFutureDateCalender()
 	{
 		int count = 0;
@@ -173,8 +195,10 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 			}
 		}
 	}
-    
-    public void selectPrevDateCalender() throws InterruptedException
+    /**
+     * Used to select previous date from date picker. Here date is hardcoded.
+     */
+    public void selectPrevDateCalender() 
 	{
 		int count = 0;
 		while(count<=60) 
@@ -190,5 +214,37 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 			}
 		}
 	}
+    /**
+     * Get properties file key value based on your arguments
+     * @param key
+     * @return String
+     * @throws Throwable
+     */
+    public String getPropertyFileData(String key) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/commonData.properties");
+    	Properties pObj = new Properties();
+    	pObj.load(fObj);
+    	String data = pObj.getProperty(key);
+    	return data;
+    }
+    /**
+     * Used to read data from excel sheet based on your arguments (testScriptData.xlsx) 
+     * @param sheetNum
+     * @param rowNum
+     * @param cellNum
+     * @return String
+     * @throws Throwable
+     */
+    public String readExcelData(String sheetNum, int rowNum, int cellNum) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/testscriptdata.xlsx");
+    	Workbook wb = WorkbookFactory.create(fObj);
+    	Sheet sh = wb.getSheet(sheetNum);
+    	Row row = sh.getRow(rowNum);
+    	Cell cel = row.getCell(cellNum);
+    	String data = cel.getStringCellValue();
+    	return data;
+    }
 }
 

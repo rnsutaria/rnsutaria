@@ -9,7 +9,7 @@ public class CustomerDashboardPage extends BasePage {
     By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
     By companyProfile=By.linkText("Company Profile");
     By portfolioCalendar = By.linkText("Portfolio Calendar");
-
+    By propertyPortfolio = By.linkText("Property Portfolio");
 
 
 
@@ -27,6 +27,14 @@ public class CustomerDashboardPage extends BasePage {
         PortfolioCalendarPage portfolioCalendarPage=new PortfolioCalendarPage();
         portfolioCalendarPage.isLoaded();
         return portfolioCalendarPage;
+    }
+    
+    public CustomerDashboardPage goToPropertyPortfolio(){
+        click(portfolioMgr);
+        click(propertyPortfolio);
+        PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
+        propertyPortfolioPage.isLoaded();
+        return propertyPortfolioPage;
     }
 
 
