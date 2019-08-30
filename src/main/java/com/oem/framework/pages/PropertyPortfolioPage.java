@@ -1,12 +1,28 @@
 package com.oem.framework.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
 	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
+	By saveSiteDataBtn = By.id("save-btn");
+	By siteName = By.id("NewSite_Name");
+	By siteName_Error = By.id("NewSite_Name-error");
+	By address1 = By.id("NewSite_Address1");
+	By address1Error = By.id("NewSite_Address1-error");
+	By postcode = By.id("NewSite_Postcode");
+	By postcodeError = By.id("NewSite_Postcode-error");
+	
+	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
+	By addMeter = By.id("add-meter-button");
+	By addMeterUtilities = By.xpath("//div[@id = 'add-meter-button']/ul/li[*]");
+	
 	By portfolioMeterDataUpload = By.xpath("//button[@id = 'add-site-btn'][2]");
 	By forecastingBtn = By.xpath("//div[@class = 'text-right']/a[1]");
 	By portfolioBtn = By.xpath("//div[@class = 'text-right']/a[2]");
@@ -31,6 +47,40 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		boolean status = propertyPortfolioPage.isElementPresent(addNewSitePopup);
 		Assert.assertEquals(status, true);
 	}
-	
+	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
+	{
+		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
+		propertyPortfolioPage.click(addSite);
+		Thread.sleep(1000);
+		propertyPortfolioPage.click(saveSiteDataBtn);
+		Thread.sleep(1000);
+		boolean status = propertyPortfolioPage.isElementPresent(siteName_Error) && propertyPortfolioPage.isElementPresent(address1Error) && propertyPortfolioPage.isElementPresent(postcodeError);
+		Assert.assertEquals(status, true);
+	}
+	public void validateAddSite() throws Throwable 
+	{
+		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
+		propertyPortfolioPage.click(addSite);
+		Thread.sleep(1000);
+		propertyPortfolioPage.click(saveSiteDataBtn);
+		Thread.sleep(1000);
+		boolean status = propertyPortfolioPage.isElementPresent(siteName_Error) && propertyPortfolioPage.isElementPresent(address1Error) && propertyPortfolioPage.isElementPresent(postcodeError);
+		Assert.assertEquals(status, true);
+	}
+	public void validateAddMeterDropdown() throws Throwable
+	{
+		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
+		propertyPortfolioPage.click(siteFirstRecord);
+		Reporter.log("Clicked on the first site present in the Property Portfolio page");
+		Thread.sleep(2000);
+		propertyPortfolioPage.click(addMeter);
+		Reporter.log("Clicked on Add Meter dropdown");
+		Thread.sleep(1000);
+		boolean status = propertyPortfolioPage.dropdowncontains(addMeterUtilities, "HH Electric") &&
+		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "nHH Electric") &&
+		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "Gas") &&
+		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "Water");
+		Reporter.log("Checked if the dropdown contains all utilities");
+	}
 	
 }

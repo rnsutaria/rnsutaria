@@ -5,9 +5,11 @@ import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.collections4.bag.SynchronizedSortedBag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -245,6 +247,24 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	Cell cel = row.getCell(cellNum);
     	String data = cel.getStringCellValue();
     	return data;
+    }
+    /**
+     * Used to check if the non-select tag dropdown contains the value
+     * @param locator of dropdown
+     * @param value
+     * @return boolean
+     */
+    public boolean dropdowncontains(By locator, String value)
+    {
+    	List<WebElement> allElements = driver.findElements(locator);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+            if(element.getText().contains(value)==true) 
+            {
+            	status = true;
+            }
+        }
+    	return status;
     }
 }
 

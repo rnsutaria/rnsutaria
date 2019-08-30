@@ -5,6 +5,7 @@ import com.oem.framework.pages.CompanyProfilePage;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.PortfolioCalendarPage;
+import com.oem.framework.pages.PropertyPortfolioPage;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -31,14 +32,7 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	
-	@Test
-	public void PM_CP_TC_018() {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.uploadLogo();
-	}
+	
 	
 	
 }
