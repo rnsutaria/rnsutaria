@@ -29,21 +29,17 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.xpath("//div[@id = 'ui-datepicker-div']");
-    
-    //CompanyProfilePage companyProfilePage = new CompanyProfilePage();
+      
     
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
         setValue(companyRegisteredAddress,"Bangalore");      
     }
 
-
     @Override
     protected void isLoaded() throws Error {
         System.out.println("Executing isLoaded in CustomerDashboard Page");
-        Assert.assertTrue(isElementPresent(companyRegisteredAddress),"Company profile Page didnt appear");
-        
-
+        Assert.assertTrue(isElementPresent(companyRegisteredAddress),"Company profile Page didnt appear");        
     }
 
     public void setFieldValue(CompanyProfileFields field,String value){

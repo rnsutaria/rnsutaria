@@ -22,6 +22,13 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 	By addMeter = By.id("add-meter-button");
 	By addMeterUtilities = By.xpath("//div[@id = 'add-meter-button']/ul/li[*]");
+	By addHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[1]");
+	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
+	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
+	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]");
+	
+	By currentMeterOperator_HH = By.id("meterOperator");
+	By procurementType = By.id("procurementType");
 	
 	By portfolioMeterDataUpload = By.xpath("//button[@id = 'add-site-btn'][2]");
 	By forecastingBtn = By.xpath("//div[@class = 'text-right']/a[1]");
@@ -41,46 +48,68 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
     }
 	public void validatePresenceAddSitePopup() throws Throwable
 	{
-		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
-		propertyPortfolioPage.click(addSite);
+		click(addSite);
 		Thread.sleep(1000);
-		boolean status = propertyPortfolioPage.isElementPresent(addNewSitePopup);
-		Assert.assertEquals(status, true);
+		Assert.assertTrue(isElementPresent(addNewSitePopup), "Add site popup is not displaying");
 	}
 	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
 	{
-		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
-		propertyPortfolioPage.click(addSite);
+		click(addSite);
 		Thread.sleep(1000);
-		propertyPortfolioPage.click(saveSiteDataBtn);
+		click(saveSiteDataBtn);
 		Thread.sleep(1000);
-		boolean status = propertyPortfolioPage.isElementPresent(siteName_Error) && propertyPortfolioPage.isElementPresent(address1Error) && propertyPortfolioPage.isElementPresent(postcodeError);
+		boolean status = isElementPresent(siteName_Error) && isElementPresent(address1Error) && isElementPresent(postcodeError);
 		Assert.assertEquals(status, true);
 	}
 	public void validateAddSite() throws Throwable 
 	{
-		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
-		propertyPortfolioPage.click(addSite);
+		click(addSite);
 		Thread.sleep(1000);
-		propertyPortfolioPage.click(saveSiteDataBtn);
+		click(saveSiteDataBtn);
 		Thread.sleep(1000);
-		boolean status = propertyPortfolioPage.isElementPresent(siteName_Error) && propertyPortfolioPage.isElementPresent(address1Error) && propertyPortfolioPage.isElementPresent(postcodeError);
-		Assert.assertEquals(status, true);
+		Assert.assertTrue(isElementPresent(siteName_Error) && isElementPresent(address1Error) && isElementPresent(postcodeError), 
+				"Validation messages for mandatory fields are not displaying");
 	}
 	public void validateAddMeterDropdown() throws Throwable
 	{
-		PropertyPortfolioPage propertyPortfolioPage = new PropertyPortfolioPage();
-		propertyPortfolioPage.click(siteFirstRecord);
+		click(siteFirstRecord);
 		Reporter.log("Clicked on the first site present in the Property Portfolio page");
 		Thread.sleep(2000);
-		propertyPortfolioPage.click(addMeter);
+		click(addMeter);
 		Reporter.log("Clicked on Add Meter dropdown");
 		Thread.sleep(1000);
-		boolean status = propertyPortfolioPage.dropdowncontains(addMeterUtilities, "HH Electric") &&
-		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "nHH Electric") &&
-		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "Gas") &&
-		propertyPortfolioPage.dropdowncontains(addMeterUtilities, "Water");
+		boolean status = dropdowncontains(addMeterUtilities, "HH Electric") &&
+		dropdowncontains(addMeterUtilities, "nHH Electric") &&
+		dropdowncontains(addMeterUtilities, "Gas") &&
+		dropdowncontains(addMeterUtilities, "Water");
 		Reporter.log("Checked if the dropdown contains all utilities");
 	}
-	
+	public void validateAddHHMeterPopup() throws Throwable
+	{
+		click(siteFirstRecord);
+		Reporter.log("Clicked on the first site present in the Property Portfolio page");
+		Thread.sleep(2000);
+		click(addMeter);
+		Reporter.log("Clicked on Add Meter dropdown");
+		Thread.sleep(1000);
+		click(addHHMeter);
+		Reporter.log("Clicked on HH Electric meter");
+		Assert.assertTrue(isElementPresent(currentMeterOperator_HH), 
+				"Popup for adding new HH Electric meter didn't appear");
+		Reporter.log("Checked if popup is displaying");
+	}
+	public void validateAddnHHMeterPopup() throws Throwable
+	{
+		click(siteFirstRecord);
+		Reporter.log("Clicked on the first site present in the Property Portfolio page");
+		Thread.sleep(2000);
+		click(addMeter);
+		Reporter.log("Clicked on Add Meter dropdown");
+		Thread.sleep(1000);
+		click(addnHHMeter);
+		Reporter.log("Clicked on nHH Electric meter");
+		Assert.assertTrue(isElementPresent(procurementType), 
+				"Popup for adding new nHH Electric meter didn't appear");
+		Reporter.log("Checked if popup is displaying");
+	}
 }

@@ -32,7 +32,14 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	
-	
+	@Test
+	public void validateAddnHHMeterPopup1() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
+		propertyPortfolioTest.validateAddnHHMeterPopup();
+	}
 	
 	
 }
