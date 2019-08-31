@@ -64,48 +64,43 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
 
     public void verifyRegisteredAddressError(String value){
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
-        companyProfilePage.click(saveBtn);
+    	setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
+        click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
                 getText(registeredAddressError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressError) +" but expected:"+value);
     }
     
     public void verifyBlankRegisteredAddressError(String value) {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(companyRegisteredAddress, "");
-        companyProfilePage.click(saveBtn);
+    	setValue(companyRegisteredAddress, "");
+        click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     }
     public void verifyRegisteredAddressErrorSpaceTestData() {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(companyRegisteredAddress, "       ");
-        companyProfilePage.click(saveBtn);
-        Assert.assertEquals(true, companyProfilePage.isElementPresent(registeredAddressBlankError));
+    	setValue(companyRegisteredAddress, "       ");
+        click(saveBtn);
+        Assert.assertEquals(true, isElementPresent(registeredAddressBlankError));
     }
 
     public void verifyCompanyNameError(String value) {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(companyName, "");
-        companyProfilePage.click(saveBtn);
+    	setValue(companyName, "");
+        click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
     }
     
     public void verifyBlankPostcodeError(String value) {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	//companyProfilePage.setValue(compPostCode, "");
-    	companyProfilePage.setValue(compPostCode, "    ");
-        companyProfilePage.click(saveBtn);
+    	
+    	//setValue(compPostCode, "");
+    	setValue(compPostCode, "    ");
+        click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
     }
     
     public void verifyCompRegistrationNumberError(String value) {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(companyRegNum, "");
-        companyProfilePage.click(saveBtn);
+    	setValue(companyRegNum, "");
+        click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     }
@@ -130,22 +125,19 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void verifyDatePickerDisplayLOAExpiresDate()
     {   
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-        companyProfilePage.click(LOAExpiresDate);
-        companyProfilePage.isElementPresent(LOAExpiresDateDatePicker);
-    	Assert.assertEquals(companyProfilePage.isElementPresent(LOAExpiresDateDatePicker), true);	
+    	click(LOAExpiresDate);
+        isElementPresent(LOAExpiresDateDatePicker);
+    	Assert.assertEquals(isElementPresent(LOAExpiresDateDatePicker), true);	
     }
     public void uploadLogo()
     {   
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-    	companyProfilePage.setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
-    	companyProfilePage.click(saveBtn);
-    	boolean status = companyProfilePage.isElementPresent(saveSuccessMsg);
+    	setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
+    	click(saveBtn);
+    	boolean status = isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);
     }
     public void verifySupplierInvoiceTo()
     {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
     	Select sel = new Select((WebElement) supplierInvoicingTo);
 		List<WebElement> lst = sel.getOptions();
 		for(WebElement wb : lst)
@@ -153,15 +145,14 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
-    	CompanyProfilePage companyProfilePage = new CompanyProfilePage();
-        companyProfilePage.setValue(companyName, compName);
-        companyProfilePage.setValue(companyRegisteredAddress, addr);
-        companyProfilePage.setValue(compPostCode, postCode);
-        companyProfilePage.setValue(phone, ph);
-        companyProfilePage.setValue(companyRegNum, regdNo);
-        companyProfilePage.click(saveBtn);
+    	setValue(companyName, compName);
+        setValue(companyRegisteredAddress, addr);
+        setValue(compPostCode, postCode);
+        setValue(phone, ph);
+        setValue(companyRegNum, regdNo);
+        click(saveBtn);
         Thread.sleep(2000);
-        boolean status = companyProfilePage.isElementPresent(saveSuccessMsg);
+        boolean status = isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);   	
     }
     
