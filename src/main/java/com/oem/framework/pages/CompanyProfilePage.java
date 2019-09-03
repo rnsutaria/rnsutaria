@@ -12,7 +12,7 @@ import org.testng.Assert;
 public class CompanyProfilePage extends CustomerDashboardPage {
 
 	By saveBtn = By.id("submit");
-	By saveSuccessMsg = By.xpath("//div[@id = 'global-message-text']");
+	By saveSuccessMsg = By.id("global-message-text");
     By companyName=By.id("Name");
     By companyRegisteredAddress=By.id("RegisteredAddress");
     By compPostCode=By.id("Postcode");
@@ -25,10 +25,12 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By companyRegNumError = By.id("CompanyRegistrationNumber-error");
     By CompanyLogo = By.id("CompanyLogo");
     By supplierInvoicingTo = By.id("InvoiceHeadOffice");
+    By preferredSupplierPayment = By.id("PreferredSupplierPayment");
+    By preferredSupplierPaymentError = By.id("PreferredSupplierPayment-error");
     By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
     By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
     By LOAExpiresDate = By.id("LOAExpiresDate");
-    By LOAExpiresDateDatePicker = By.xpath("//div[@id = 'ui-datepicker-div']");
+    By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
       
     
     public void fillCompanyProfile(){
@@ -105,14 +107,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     }
     
-    public void displayDropdownOptions(WebElement element)
-	{
-		Select sel = new Select(element);
-		List<WebElement> lst = sel.getOptions();
-		for(WebElement wb : lst)
-			System.out.println(wb.getText());
-	}
-    
     public void verifyLOATemplateDisplay(String value)
     {
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(loaTemplate)) &&
@@ -136,12 +130,27 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	boolean status = isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);
     }
-    public void verifySupplierInvoiceTo()
+    public void validateOptionsSupplierInvoiceTo()
     {
-    	Select sel = new Select((WebElement) supplierInvoicingTo);
-		List<WebElement> lst = sel.getOptions();
-		for(WebElement wb : lst)
-			System.out.println(wb.getText());
+    	boolean status = isElementExistInDropDown(supplierInvoicingTo, "Individual Sites") &&
+    			isElementExistInDropDown(supplierInvoicingTo, "Head Office");
+    	Assert.assertTrue(status, "Dropdown options are not displaying in Supplier Invoice To");
+    }
+    public void validateOptionsPrefferedSupplierPayment()
+    {
+    	boolean status = isElementExistInDropDown(preferredSupplierPayment, "Direct Debit") &&
+    			isElementExistInDropDown(preferredSupplierPayment, "Chaps") &&
+    			isElementExistInDropDown(preferredSupplierPayment, "14 Day BACs") &&
+    			isElementExistInDropDown(preferredSupplierPayment, "24 Day BACs") &&
+    			isElementExistInDropDown(preferredSupplierPayment, "30 Day BACs");
+    	Assert.assertTrue(status, "Dropdown options are not displaying in Preferred Supplier Payment");
+    }
+    public void validateMandatoryPrefferedSupplierPayment()
+    {	
+    	selectByVisibleText(preferredSupplierPayment,"Please select");
+    	click(saveBtn);
+    	Assert.assertTrue(getText(preferredSupplierPaymentError).equals("Preferred supplier payment field is required"), 
+    			"Error message for Preferred Supplier Payment is not displaying");
     }
     public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
@@ -152,8 +161,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         setValue(companyRegNum, regdNo);
         click(saveBtn);
         Thread.sleep(2000);
-        boolean status = isElementPresent(saveSuccessMsg);
-        Assert.assertEquals(true, status);   	
+        Assert.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn’t appear after saving profile data.");   	
     }
     
     

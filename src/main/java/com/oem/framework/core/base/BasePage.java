@@ -127,11 +127,10 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(locator);
         new Select(driver.findElement(locator)).selectByValue(value);
     }
-    
-    
 
     public boolean isElementPresent(By locator) {
-        try {
+    	waitForElementPresent(locator);
+    	try {
             WebElement element = driver.findElement(locator);
             if (element == null)
                 return false;
@@ -249,12 +248,12 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	return data;
     }
     /**
-     * Used to check if the non-select tag dropdown contains the value
+     * Used to check if the dropdown contains the value
      * @param locator of dropdown
      * @param value
      * @return boolean
      */
-    public boolean dropdowncontains(By locator, String value)
+    public boolean isElementExistInDropDown(By locator, String value)
     {
     	List<WebElement> allElements = driver.findElements(locator);
     	boolean status = false;

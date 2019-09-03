@@ -34,14 +34,6 @@ public class PortfolioCalendarTest extends BaseTest{
 		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
 		portfolioCalendarPage.verifyCloseBtnPortfolioCalendarEntrypopup();
 	}
-	@Test(dataProvider = "getData")
-	public void PM_PC_TC_006(String description) throws InterruptedException {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.verifyspaceDataPortfolioCaledarEntryPopup(description);
-	}
 	@Test
 	public void PM_PC_TC_008() throws Exception {
 		LoginPage loginPage = new LoginPage();
@@ -105,6 +97,14 @@ public class PortfolioCalendarTest extends BaseTest{
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
 		portfolioCalendarPage.validateEditEventChangingDescription();
+	}
+	@Test(dataProvider = "getData")
+	public void PM_PC_TC_006(String description) throws InterruptedException {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
+		portfolioCalendarPage.verifyspaceDataPortfolioCaledarEntryPopup(description);
 	}
 	@DataProvider
 	public Object[][] getData() {

@@ -77,11 +77,10 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Thread.sleep(2000);
 		click(addMeter);
 		Reporter.log("Clicked on Add Meter dropdown");
-		Thread.sleep(1000);
-		boolean status = dropdowncontains(addMeterUtilities, "HH Electric") &&
-		dropdowncontains(addMeterUtilities, "nHH Electric") &&
-		dropdowncontains(addMeterUtilities, "Gas") &&
-		dropdowncontains(addMeterUtilities, "Water");
+		boolean status = isElementExistInDropDown(addMeterUtilities, "HH Electric") &&
+				isElementExistInDropDown(addMeterUtilities, "nHH Electric") &&
+				isElementExistInDropDown(addMeterUtilities, "Gas") &&
+				isElementExistInDropDown(addMeterUtilities, "Water");
 		Reporter.log("Checked if the dropdown contains all utilities");
 	}
 	public void validateAddHHMeterPopup() throws Throwable
@@ -111,5 +110,15 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Assert.assertTrue(isElementPresent(procurementType), 
 				"Popup for adding new nHH Electric meter didn't appear");
 		Reporter.log("Checked if popup is displaying");
+	}
+	public void validateAddGasMeter()
+	{
+		click(siteFirstRecord);
+		Reporter.log("Clicked on the first site present in the Property Portfolio page");
+		click(addMeter);
+		Reporter.log("Clicked on Add Meter dropdown");
+		click(addGasMeter);
+		Reporter.log("Clicked on Gas meter");
+		
 	}
 }

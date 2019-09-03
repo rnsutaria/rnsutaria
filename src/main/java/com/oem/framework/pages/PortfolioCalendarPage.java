@@ -26,12 +26,14 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	By eventDescriptionErrorMessage = By.id("NewCalendarEntry_EventDescription-error");
 	By deleteEntry = By.xpath("//tbody[@aria-live = 'polite']/tr[1]/td[4]/a");
 	By delete_popup = By.xpath("//div[@class = 'vex-dialog-message' and text() = 'Are you sure you want to delete this event?']");
-	By delete_CancelBtn = By.xpath("//button[@class = 'vex-dialog-button-secondary vex-dialog-button vex-last' and text() = 'Cancel']");
-	By delete_OkBtn = By.xpath("//button[@class = 'vex-dialog-button-primary vex-dialog-button vex-first' and text() = 'OK']");
+	By delete_CancelBtn = By.xpath("//button[@class and text() = 'Cancel']");
+	By delete_OkBtn = By.xpath("//button[@class and text() = 'OK']");
 	By eventDes_firstRecord = By.xpath("//tbody[@aria-live = 'polite']/tr[1]/td[2]");
+	By eventDes_AllRecords = By.xpath("//table[@id = 'event-table']/tbody/tr[*]/td[2]");
 	By eventDate_firstRecord = By.xpath("//table[@id = 'event-table']/tbody/tr[1]/td[1]");
 	By editEntry = By.xpath("//tbody[@aria-live = 'polite']/tr[1]/td[3]/a");
 	By edit_popup = By.xpath("//h3[text() = 'Edit portfolio calendar entry']");
+	
 	
 	
 	@Override
@@ -62,6 +64,8 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		selectFutureDateCalender();
 		setValue(eventDescription, data);
 		click(saveBtn);
+		Assert.assertTrue(isElementExistInDropDown(eventDes_AllRecords, data), 
+				"The event was not saved");
 	}
 	public void validateEventDescriptionPortfolioCaledarEntryPopup(String value) throws InterruptedException
 	{

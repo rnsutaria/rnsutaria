@@ -97,7 +97,25 @@ public class CompanyProfileTest extends BaseTest {
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		//companyProfilePage
+		companyProfilePage.validateOptionsSupplierInvoiceTo();
+	}
+	@Test
+	public void PM_CP_TC_021()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateOptionsPrefferedSupplierPayment();
+	}
+	@Test
+	public void PM_CP_TC_022()
+	{
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateMandatoryPrefferedSupplierPayment();
 	}
 
 	@Test
