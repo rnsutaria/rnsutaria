@@ -18,6 +18,16 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By address1Error = By.id("NewSite_Address1-error");
 	By postcode = By.id("NewSite_Postcode");
 	By postcodeError = By.id("NewSite_Postcode-error");
+	By siteContactName = By.id("NewSite_ContactName");
+	By contactPhoneNo = By.id("NewSite_PhoneNo");
+	By contactEmail = By.id("NewSite_Email");
+	By siteID = By.id("NewSite_SiteId");
+	By address2 = By.id("NewSite_Address2");
+	By address3 = By.id("NewSite_Address3");
+	By address4 = By.id("NewSite_Address4");
+	By siteArea = By.id("NewSite_SiteArea");
+	
+	
 	
 	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 	By addMeter = By.id("add-meter-button");
@@ -26,6 +36,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
 	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
 	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]");
+	By saveMeter = By.id("save-meter-button");
 	
 	By currentMeterOperator_HH = By.id("meterOperator");
 	By procurementType = By.id("procurementType");
@@ -52,29 +63,89 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		Assert.assertTrue(isElementPresent(addNewSitePopup), "Add site popup is not displaying");
 	}
+	
 	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
 	{
 		click(addSite);
 		Thread.sleep(1000);
 		click(saveSiteDataBtn);
 		Thread.sleep(1000);
-		boolean status = isElementPresent(siteName_Error) && isElementPresent(address1Error) && isElementPresent(postcodeError);
-		Assert.assertEquals(status, true);
+		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
+		boolean address1ErrorStatus = isElementPresent(address1Error);
+		boolean postcodeErrorStatus = isElementPresent(postcodeError);
+		Assert.assertTrue(siteNameErrorStatus && address1ErrorStatus && postcodeErrorStatus, 
+				"Validation messages for mandatory fields are not displaying");
 	}
-	public void validateAddSite() throws Throwable 
+	public void validateAddressPostcodeMandatoryFieldsAddSitePopup() throws Throwable 
 	{
 		click(addSite);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
+		setValue(siteName, "Patia");
 		click(saveSiteDataBtn);
-		Thread.sleep(1000);
-		Assert.assertTrue(isElementPresent(siteName_Error) && isElementPresent(address1Error) && isElementPresent(postcodeError), 
+		//Thread.sleep(1000);
+		boolean address1ErrorStatus = isElementPresent(address1Error);
+		boolean postcodeErrorStatus = isElementPresent(postcodeError);
+		Assert.assertTrue(address1ErrorStatus && postcodeErrorStatus, 
 				"Validation messages for mandatory fields are not displaying");
+	}
+	public void validateMandatorySiteNamePostcodeFieldsInAddSitePopup() {
+		click(addSite);
+		setValue(address1, "Patia");
+		click(saveSiteDataBtn);
+		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
+		boolean postcodeErrorStatus = isElementPresent(postcodeError);
+		Assert.assertTrue(siteNameErrorStatus && postcodeErrorStatus, 
+				"Validation messages for mandatory fields are not displaying");
+	}
+	public void validateMandatorySiteNameAddressFieldsInAddSitePopup() throws InterruptedException {
+		click(addSite);
+		Thread.sleep(2000);
+		setValue(postcode, "8723423");
+		Thread.sleep(1000);
+		System.out.println("Value in the textbox is " + driver.findElement(By.id("NewSite_Postcode")).getAttribute("value"));
+		/*click(saveSiteDataBtn);
+		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
+		boolean address1ErrorStatus = isElementPresent(address1Error);
+		Assert.assertTrue(siteNameErrorStatus && address1ErrorStatus, 
+				"Validation messages for mandatory fields are not displaying");*/
+	}
+	public void validateAddSitePopupDataProvider(String name, String addr1, String postCode, String siteContactNAME, 
+			String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteAREA) throws Throwable
+	{
+		click(addSite);
+		Thread.sleep(2000);
+		setValue(siteName, name);
+		setValue(address1, addr1);
+		setValue(postcode, postCode);
+		setValue(siteContactName, siteContactNAME);
+		setValue(contactPhoneNo, contactPHONENo);
+		setValue(contactEmail, contactEMAIL);
+		setValue(siteID, site_ID);
+		setValue(address2, addr2);
+		setValue(address3, addr3);
+		setValue(address4, addr4);
+		setValue(siteArea, siteAREA);
+		
+		click(saveSiteDataBtn);
+		
+		if(getAttribute(siteName, "value").equals("")) {
+			verifyElementPresent(siteName_Error);
+			boolean siteNameErr = isElementPresent(siteName_Error);
+		}
+		if(getAttribute(address1, "value").equals("")) {
+			verifyElementPresent(address1Error);
+		}
+		if(getAttribute(address1, "value").equals("")) {
+			verifyElementPresent(address1Error);
+		}
+			
+		
 	}
 	public void validateAddMeterDropdown() throws Throwable
 	{
 		click(siteFirstRecord);
 		Reporter.log("Clicked on the first site present in the Property Portfolio page");
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		click(addMeter);
 		Reporter.log("Clicked on Add Meter dropdown");
 		boolean status = isElementExistInDropDown(addMeterUtilities, "HH Electric") &&
@@ -119,6 +190,5 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on Add Meter dropdown");
 		click(addGasMeter);
 		Reporter.log("Clicked on Gas meter");
-		
 	}
 }

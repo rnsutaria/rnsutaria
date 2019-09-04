@@ -32,13 +32,12 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	@Test
-	public void PM_CP_TC_022()
-	{
+	public void PM_PP_TC_008() throws InterruptedException{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.validateMandatoryPrefferedSupplierPayment();
+		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
+		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
 	}
 	
 	
