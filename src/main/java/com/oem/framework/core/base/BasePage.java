@@ -73,7 +73,19 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
         }
     }
+    /**
+     * Explicitely wait for an element to dissapear.
+     * @param locator
+     */
+    public void waitForElementInvisible(By locator) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
+        } catch (Exception e) {
+
+        }
+    }
 
     public void scrollToElement(By locator) {
         WebElement element = driver.findElement(locator);

@@ -51,7 +51,22 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
 	}*/
-	@Test(dataProvider = "getData")
+	/**
+	 * Executes 'Add site' popup test cases from PM_PP_TC_005 to PM_PP_TC_013 
+	 * @param name
+	 * @param addr1
+	 * @param postCode
+	 * @param siteContactNAME
+	 * @param contactPHONENo
+	 * @param contactEMAIL
+	 * @param site_ID
+	 * @param addr2
+	 * @param addr3
+	 * @param addr4
+	 * @param siteArea
+	 * @throws Throwable
+	 */
+	@Test(dataProvider = "getData") //PM_PP_TC_005 - PM_PP_TC_013
 	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage

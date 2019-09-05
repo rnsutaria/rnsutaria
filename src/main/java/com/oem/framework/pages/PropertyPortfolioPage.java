@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.asserts.SoftAssert;
 
 public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
@@ -27,7 +28,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By address4 = By.id("NewSite_Address4");
 	By siteArea = By.id("NewSite_SiteArea");
 	
-	
+	By siteNameList = By.xpath("//div[@id = 'divSitesOverview']/hgroup[*]/table/tbody/tr/td[2]/div[1]");
 	
 	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 	By addMeter = By.id("add-meter-button");
@@ -112,7 +113,9 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	public void validateAddSitePopupDataProvider(String name, String addr1, String postCode, String siteContactNAME, 
 			String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteAREA) throws Throwable
 	{
+		SoftAssert s = new SoftAssert();
 		click(addSite);
+		Reporter.log("Clicked Add Site button", true);
 		Thread.sleep(2000);
 		setValue(siteName, name);
 		setValue(address1, addr1);
@@ -125,21 +128,40 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		setValue(address3, addr3);
 		setValue(address4, addr4);
 		setValue(siteArea, siteAREA);
-		
+		Reporter.log("Entered data in various fields in 'Add Site' popup", true);
 		click(saveSiteDataBtn);
-		
+		Reporter.log("Clicked save button", true);
 		if(getAttribute(siteName, "value").equals("")) {
-			verifyElementPresent(siteName_Error);
 			boolean siteNameErr = isElementPresent(siteName_Error);
+			s.assertTrue(siteNameErr, "Error message for 'Site Name' field is not displaying");
+			Reporter.log("Checked if validation message for site name field is displaying", true);
 		}
 		if(getAttribute(address1, "value").equals("")) {
-			verifyElementPresent(address1Error);
+			boolean addressErr = isElementPresent(address1Error);
+			s.assertTrue(addressErr, "Error message for 'Address' field is not displaying");
+			Reporter.log("Checked if validation message for address1 field is displaying", true);
 		}
-		if(getAttribute(address1, "value").equals("")) {
-			verifyElementPresent(address1Error);
+		if(getAttribute(postcode, "value").equals("")) {
+			boolean postcodeErr = isElementPresent(postcodeError);
+			s.assertTrue(postcodeErr, "Error message for 'postcode' field is not displaying");
+			Reporter.log("Checked if validation message for postcode field is displaying", true);
 		}
-			
-		
+		waitForElementInvisible(addNewSitePopup);
+		boolean popupDisplayStatus = isElementPresent(addNewSitePopup);
+		if(popupDisplayStatus) {
+			Assert.assertTrue(popupDisplayStatus, "Add site form is not getting saved");
+		}
+		List<WebElement> siteNames = driver.findElements(siteNameList);
+		boolean siteAddstatus = false;
+    	for (WebElement siteName: siteNames) {
+            if(siteName.getText().contains(name)==true) 
+            {
+            	siteAddstatus = true;
+            }
+        }
+		s.assertTrue(siteAddstatus, "Site not displaying in site table after creation");
+		Reporter.log("Checked if the site is displaying in site table after site creation", true);
+		s.assertAll();	
 	}
 	public void validateAddMeterDropdown() throws Throwable
 	{
