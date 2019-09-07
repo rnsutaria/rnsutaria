@@ -153,7 +153,7 @@ public class CompanyProfileTest extends BaseTest {
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.click(By.id("LOAExpiresDate"));
-		companyProfilePage.selectFutureDateCalender();
+		companyProfilePage.selectFutureDateCalender(27, 10, 2021);
 	}
 
 	@Test
@@ -163,7 +163,7 @@ public class CompanyProfileTest extends BaseTest {
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.click(By.id("LOAExpiresDate"));
-		companyProfilePage.selectPrevDateCalender();
+		companyProfilePage.selectPrevDateCalender(12, 5, 2017);
 	}
 
 	@Test

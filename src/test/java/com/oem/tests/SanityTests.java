@@ -8,6 +8,7 @@ import com.oem.framework.pages.PortfolioCalendarPage;
 import com.oem.framework.pages.PropertyPortfolioPage;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SanityTests extends BaseTest {
@@ -32,14 +33,13 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	@Test
-	public void PM_PP_TC_008() throws InterruptedException{
+	public void PM_PP_TC_015() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.loginUsing("ando.laamitav@gmail.com", "amitav123");
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
+		propertyPortfolioTest.validateAddHHMeterPopup();
 	}
-	
 	
 	
 }

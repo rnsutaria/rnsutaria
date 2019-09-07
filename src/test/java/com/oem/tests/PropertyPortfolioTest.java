@@ -66,7 +66,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @param siteArea
 	 * @throws Throwable
 	 */
-	@Test(dataProvider = "getData") //PM_PP_TC_005 - PM_PP_TC_013
+	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_013
 	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -76,14 +76,14 @@ public class PropertyPortfolioTest extends BaseTest {
 				siteContactNAME, contactPHONENo, contactEMAIL, site_ID, addr2, addr3, addr4, siteArea);
 	}
 	@DataProvider
-	public Object[][] getData()
+	public Object[][] getDataForAddSite()
 	{
 		Object[][] data = 
 			{{"", "", "", "Henricks", "9823948232", "andola.amitav@gmail.com", "8125", "GR Complex", "Domlur", "Karnataka", "2000"}};
 				
 		return data;
 	}
-	/*@Test
+	@Test
 	public void PM_PP_TC_014() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -99,7 +99,28 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddHHMeterPopup();
 	}
-	@Test
+	/* Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  */
+	@Test(dataProvider = "getHHMeterData")
+	public void addHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
+			String expectedConsumption, String currentSupplier, String capacity, String currentAnnualSpend, 
+			String currentMeterOperator, String currentDataCollector) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
+		propertyPortfolioTest.addHHMeterUsingDifferentTestData(meterNoDropdownFieldValue, meterNoSecondField, meterNoThirdField, 
+				meterNoFourthField,	meterNoFifthField, meterNoSixthField, meterNoSeventhField, procurementType,	expectedConsumption, 
+				currentSupplier, capacity, currentAnnualSpend, currentMeterOperator, currentDataCollector);
+	}
+	@DataProvider
+	public Object[][] getHHMeterData()
+	{
+		Object[][] data = {{"00", "234", "123", "234", "345", "234", "234", "Combined Flexible", "2000", "F&S Energy", "4500", "3200", "Bury Metering Services Limited", "Energy Assets"},
+		{"00", "", "", "", "", "", "", "Flexible", "2500", "F&S Energy", "3500", "3200", "Bury Metering Services Limited", "Energy Assets"}};
+		return data;
+	}
+	/*@Test
 	public void validateAddnHHMeterPopup1() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage

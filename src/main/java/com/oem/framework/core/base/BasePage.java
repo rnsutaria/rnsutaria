@@ -190,15 +190,18 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	driver.findElement(locator).sendKeys(keys);
     }
     /**
-     * Used to select future date from date picker. Here date is hardcoded.
+     * Used to select a future date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
+     * @param date
+     * @param month
+     * @param year
      */
-    public void selectFutureDateCalender()
+    public void selectFutureDateCalender(int date, int month, int year)
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '8' and @data-year = '2019']/a[text() = '25']")).click();//Sep 25, 2019
+				driver.findElement(By.xpath("//td[@data-month = '" + month + "' and @data-year = '" + year + "']/a[text() = '" + date + "']")).click();//Sep 25, 2019
 				break;
 			}
 			catch(Exception e)
@@ -209,15 +212,18 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		}
 	}
     /**
-     * Used to select previous date from date picker. Here date is hardcoded.
+     * Used to select a previous date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
+     * @param date
+     * @param month
+     * @param year
      */
-    public void selectPrevDateCalender() 
+    public void selectPrevDateCalender(int date, int month, int year) 
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '2' and @data-year = '2016']/a[text() = '7']")).click();//March 7, 2016
+				driver.findElement(By.xpath("//td[@data-month = '" + month + "' and @data-year = '" + year + "']/a[text() = '" + date + "']")).click();//March 7, 2016
 				break;
 			}
 			catch(Exception e)

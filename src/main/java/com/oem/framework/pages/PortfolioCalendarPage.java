@@ -61,7 +61,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(addCalendarEntry);
 		Thread.sleep(2000);
 		click(eventDate);
-		selectFutureDateCalender();
+		selectFutureDateCalender(15, 3, 2020);
 		setValue(eventDescription, data);
 		click(saveBtn);
 		Assert.assertTrue(isElementExistInDropDown(eventDes_AllRecords, data), 
@@ -72,7 +72,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(addCalendarEntry);
 		Thread.sleep(2000);
 		click(eventDate);
-		selectFutureDateCalender();
+		selectFutureDateCalender(20, 4, 2020);
 		setValue(eventDescription, "");
 		click(saveBtn);
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(eventDescriptionErrorMessage)) &&
@@ -134,19 +134,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		Reporter.log("clicked 'Edit Entry' button for first row");
 		Thread.sleep(1000);
 		click(eventDate);
-		int count = 0;
-		while(count<=60) 
-		{
-			try {
-				driver.findElement(By.xpath("//td[@data-month = '2' and @data-year = '2017']/a[text() = '20']")).click();//March 20, 2017
-				break;
-			}
-			catch(Exception e)
-			{
-				driver.findElement(By.xpath("//a[@data-handler = 'prev']/span[text() = 'Prev']")).click();
-				count++;
-			}
-		}
+		selectPrevDateCalender(20, 2, 2017);
 		Reporter.log("Entered date in date picker");
 		click(saveBtn);
 		Reporter.log("Clicked save entry button");
