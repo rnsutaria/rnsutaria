@@ -51,7 +51,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
 	}*/
-	/**
+	/*/**
 	 * Executes 'Add site' popup test cases from PM_PP_TC_005 to PM_PP_TC_013 
 	 * @param name
 	 * @param addr1
@@ -65,7 +65,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @param addr4
 	 * @param siteArea
 	 * @throws Throwable
-	 */
+	 
 	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_013
 	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
@@ -99,7 +99,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddHHMeterPopup();
 	}
-	/* Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  */
+	 Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  
 	@Test(dataProvider = "getHHMeterData")
 	public void addHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
@@ -120,7 +120,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		{"00", "", "", "", "", "", "", "Flexible", "2500", "F&S Energy", "3500", "3200", "Bury Metering Services Limited", "Energy Assets"}};
 		return data;
 	}
-	/*@Test
+	@Test
 	public void validateAddnHHMeterPopup1() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -136,5 +136,22 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddnHHMeterPopup();
 	}*/
-
+	@Test(dataProvider = "getNHHData")
+	public void executeAddNHHUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
+			String expectedConsumption, String currentSupplier, String currentAnnualSpend) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage)loginPage.login();
+		PropertyPortfolioPage propertyPortfolioPage = (PropertyPortfolioPage)customerDashboardPage.goToPropertyPortfolio();
+		propertyPortfolioPage.addNHHMeterUsingDifferntTestData(meterNoDropdownFieldValue, meterNoSecondField, meterNoThirdField, 
+				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, procurementType, 
+				expectedConsumption, currentSupplier, currentAnnualSpend);
+	}
+	@DataProvider
+	public Object[][] getNHHData()  {
+		Object[][] data = {{"03", "", "", "", "", "", "", "Flexible", "5000", "Ecotricity", "4500"},
+				{"03", "234", "456", "75", "2346", "7454", "345", "Combined Flexible", "4000", "Haven Power", "3500"},
+				{"03", "345", "462", "12", "0005", "2005", "514", "Combined Flexible", "4800", "Scottish and Southern", "5500"}};
+		return data;
+	}
 }

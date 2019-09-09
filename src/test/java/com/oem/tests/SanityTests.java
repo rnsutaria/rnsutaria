@@ -36,8 +36,9 @@ public class SanityTests extends BaseTest {
 	public void PM_PP_TC_015() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
+		
 		propertyPortfolioTest.validateAddHHMeterPopup();
 	}
 	
