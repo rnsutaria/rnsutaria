@@ -43,15 +43,6 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_007() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyCompanyNameError("The Company name field is required.");
-	}
-
-	@Test
 	public void PM_CP_TC_006() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -59,6 +50,24 @@ public class CompanyProfileTest extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyBlankRegisteredAddressError("Registered address field is required");
 
+	}
+	
+	@Test
+	public void PM_CP_TC_007() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.verifyCompanyNameError("The Company name field is required.");
+	}
+	
+	@Test
+	public void PM_CP_TC_008() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateCompanyNameAlphabeticAcceptance();
 	}
 
 	@Test
@@ -69,6 +78,32 @@ public class CompanyProfileTest extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyBlankPostcodeError("Postcode field is required");
 	}
+	
+	@Test
+	public void PM_CP_TC_010() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validatePostcodeSpecialSymbolTest();
+	}
+	
+	@Test
+	public void PM_CP_TC_011() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validatePostcodeNumericDataTest();
+	}
+	/*@Test
+	public void PM_CP_TC_012() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateIfPhoneFieldMandatory();
+	}*/
 
 	@Test
 	public void PM_CP_TC_015() throws Throwable {
@@ -183,7 +218,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test(dataProvider = "getData")
-	public void dataDriven(String compName, String addr, String postCode, String ph, String regdNo)
+	public void fillCompanyProfileWithDifferentDataTest(String compName, String addr, String postCode, String ph, String regdNo)
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -194,57 +229,14 @@ public class CompanyProfileTest extends BaseTest {
 
 	@DataProvider
 	public Object[][] getData() {
-		 Object[][] data = new Object[7][5];
-				
-		// set 1 : all valid
-		data[0][0] = "Tibco Inc";// comp name
-		data[0][1] = "Bangalore";// address
-		data[0][2] = "123456";// postcode
-		data[0][3] = "7234823423";// phone
-		data[0][4] = "123456";// regd number
-
-		// set 2 : company name alphanumeric
-		data[1][0] = "Tibco12345";// comp name
-		data[1][1] = "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka";// address
-		data[1][2] = "123456";// postcode
-		data[1][3] = "7234823423";// phone
-		data[1][4] = "123456";// regd number
-
-		// set 3 : company name symbolic
-		data[2][0] = "!@#$%^&";// comp name
-		data[2][1] = "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka";// address
-		data[2][2] = "123456";// postcode
-		data[2][3] = "7234823423";// phone
-		data[2][4] = "123456";// regd number
-
-		// set 4 : company name space data
-		data[3][0] = "      ";// comp name
-		data[3][1] = "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka";// address
-		data[3][2] = "123456";// postcode
-		data[3][3] = "7234823423";// phone
-		data[3][4] = "123456";// regd number
-
-		// set 5 : company name symbolic
-		data[4][0] = "</html>";// comp name
-		data[4][1] = "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka";// address
-		data[4][2] = "123456";// postcode
-		data[4][3] = "7234823423";// phone
-		data[4][4] = "123456";// regd number
-
-		// set 6 : Registered address numeric
-		data[5][0] = "AGB3";// comp name
-		data[5][1] = "123456789";// address
-		data[5][2] = "123456";// postcode
-		data[5][3] = "7234823423";// phone
-		data[5][4] = "123456";// regd number
-
-		// set 7 : Registered address
-		data[6][0] = "AGB3";// comp name
-		data[6][1] = "!@#$%^&*";// address
-		data[6][2] = "123456";// postcode
-		data[6][3] = "7234823423";// phone
-		data[6][4] = "123456";// regd number
-
-		return data;
+		 Object[][] data = {{"Tibco Inc", "Bangalore", "123456", "7234823423", "123456"},
+				 {"Tibco12345", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"},
+		 {"!@#$%^&", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"},
+		 {"      ", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"},
+		 {"</html>", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"},
+		 {"AGB3", "123456789", "123456", "7234823423", "123456"},
+		 {"AGB3", "!@#$%^&*", "123456", "7234823423", "123456"}};
+		
+		 return data;
 	}
 }

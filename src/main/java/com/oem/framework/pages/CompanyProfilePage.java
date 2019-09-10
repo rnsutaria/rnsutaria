@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 public class CompanyProfilePage extends CustomerDashboardPage {
 
@@ -31,7 +32,8 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
-      
+    
+    By postCodeValidationError = By.xpath("//*[text() = 'Please enter valid postcode']");
     
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
@@ -92,6 +94,14 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
     }
     
+    public void validateCompanyNameAlphabeticAcceptance() {
+    	setValue(companyName, "Apple");
+    	String attrValue = getAttribute(companyName, "value");
+    	boolean displayStatus = attrValue.equals("Apple");
+    	Reporter.log("Checked if the value attribute is displaying the same as entered in the 'Company Name' textbox", true);
+    	Assert.assertTrue(displayStatus, "Company Name field is not accepting alphabetic characters");
+    }
+    
     public void verifyBlankPostcodeError(String value) {
     	
     	//setValue(compPostCode, "");
@@ -99,6 +109,22 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
+    }
+    
+    public void validatePostcodeSpecialSymbolTest() {
+    	setValue(compPostCode, "%<>#");
+        click(saveBtn);
+        boolean invalidPostcodeErrorDisplayStatus = isElementPresent(postCodeValidationError);
+        Reporter.log("Checked if error message for invalid postcode is displaying", true);
+        Assert.assertTrue(invalidPostcodeErrorDisplayStatus, "Invalid postcode error is not displaying.");
+    }
+    
+    public void validatePostcodeNumericDataTest() {
+    	setValue(compPostCode, "8923443");
+    	String postcodeValueAtrributeValue = getAttribute(compPostCode, "value");
+    	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
+    	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
+    	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
     }
     
     public void verifyCompRegistrationNumberError(String value) {

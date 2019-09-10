@@ -33,13 +33,12 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	@Test
-	public void PM_PP_TC_015() throws Throwable {
+	public void PM_CP_TC_011() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		
-		propertyPortfolioTest.validateAddHHMeterPopup();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validatePostcodeNumericDataTest();
 	}
 	
 	
