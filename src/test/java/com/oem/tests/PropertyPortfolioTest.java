@@ -11,11 +11,11 @@ import com.oem.framework.pages.PropertyPortfolioPage;
 
 public class PropertyPortfolioTest extends BaseTest {
 	
-	/*@Test
+	@Test
 	public void PM_PP_TC_004() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validatePresenceAddSitePopup();
 	}
@@ -23,7 +23,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void PM_PP_TC_005() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateMandatoryFieldsAddSitePopup();
 	}
@@ -31,27 +31,28 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void PM_PP_TC_006() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddressPostcodeMandatoryFieldsAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_007() {
+	public void PM_PP_TC_007() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateMandatorySiteNamePostcodeFieldsInAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_008() throws InterruptedException  {
+	public void PM_PP_TC_008() throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
-	}*/
-	/*/**
+	}
+	 
+	/**
 	 * Executes 'Add site' popup test cases from PM_PP_TC_005 to PM_PP_TC_013 
 	 * @param name
 	 * @param addr1
@@ -65,12 +66,12 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @param addr4
 	 * @param siteArea
 	 * @throws Throwable
-	 
+	 */
 	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_013
 	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddSitePopupDataProvider(name, addr1, postCode, 
 				siteContactNAME, contactPHONENo, contactEMAIL, site_ID, addr2, addr3, addr4, siteArea);
@@ -87,7 +88,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void PM_PP_TC_014() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddMeterDropdown();
 	}
@@ -95,11 +96,11 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void PM_PP_TC_015() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddHHMeterPopup();
 	}
-	 Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  
+	 //Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  
 	@Test(dataProvider = "getHHMeterData")
 	public void addHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
@@ -107,7 +108,7 @@ public class PropertyPortfolioTest extends BaseTest {
 			String currentMeterOperator, String currentDataCollector) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.addHHMeterUsingDifferentTestData(meterNoDropdownFieldValue, meterNoSecondField, meterNoThirdField, 
 				meterNoFourthField,	meterNoFifthField, meterNoSixthField, meterNoSeventhField, procurementType,	expectedConsumption, 
@@ -124,7 +125,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void validateAddnHHMeterPopup1() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddnHHMeterPopup();
 	}
@@ -132,10 +133,10 @@ public class PropertyPortfolioTest extends BaseTest {
 	public void validateAddnHHMeterPopup2() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddnHHMeterPopup();
-	}*/
+	}
 	@Test(dataProvider = "getNHHData")
 	public void executeAddNHHUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	

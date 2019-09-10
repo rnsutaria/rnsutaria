@@ -8,27 +8,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
-public class PropertyPortfolioPage extends CustomerDashboardPage {
-	
-	By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
-	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
-	By saveSiteDataBtn = By.id("save-btn");
-	By siteName = By.id("NewSite_Name");
-	By siteName_Error = By.id("NewSite_Name-error");
-	By address1 = By.id("NewSite_Address1");
-	By address1Error = By.id("NewSite_Address1-error");
-	By postcode = By.id("NewSite_Postcode");
-	By postcodeError = By.id("NewSite_Postcode-error");
-	By siteContactName = By.id("NewSite_ContactName");
-	By contactPhoneNo = By.id("NewSite_PhoneNo");
-	By contactEmail = By.id("NewSite_Email");
-	By siteID = By.id("NewSite_SiteId");
-	By address2 = By.id("NewSite_Address2");
-	By address3 = By.id("NewSite_Address3");
-	By address4 = By.id("NewSite_Address4");
-	By siteArea = By.id("NewSite_SiteArea");
-	
-	By siteNameList = By.xpath("//div[@id = 'divSitesOverview']/hgroup[*]/table/tbody/tr/td[2]/div[1]");
+public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	
 	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 	By addMeter = By.id("add-meter-button");
@@ -167,15 +147,6 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By invalidMPANPopup = By.xpath("//div[text() = 'MPAN failed check digit validation, please review the number and try again']");
 	By okButtonInPopUp = By.xpath("//button[text() = 'OK']");
 	
-	By portfolioMeterDataUpload = By.xpath("//button[@id = 'add-site-btn'][2]");
-	By forecastingBtn = By.xpath("//div[@class = 'text-right']/a[1]");
-	By portfolioBtn = By.xpath("//div[@class = 'text-right']/a[2]");
-	By filterByAllUtilities = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[1]");
-	By filterBy_HH_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[2]");
-	By filterBy_nHH_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[3]");
-	By filterBy_gas_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[4]");
-	By filterBy_water_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[5]");
-	
 	public void addNHHMeterUsingDifferntTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
 			String expectedConsumption, String currentSupplier, String currentAnnualSpend) throws Throwable	{
@@ -266,116 +237,11 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	@Override
     protected void isLoaded() throws Error {
-        System.out.println("Executing isLoaded in CustomerDashboard Page");
-        Assert.assertTrue(isElementPresent(addSite),"Property Portfolio Page didnt appear");
+        System.out.println("Executing isLoaded in Site Meters Page");
+        Assert.assertTrue(isElementPresent(addMeter),"Site Meters page didnt appear");
         
     }
-	public void validatePresenceAddSitePopup() throws Throwable
-	{
-		click(addSite);
-		Thread.sleep(1000);
-		Assert.assertTrue(isElementPresent(addNewSitePopup), "Add site popup is not displaying");
-	}
 	
-	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
-	{
-		click(addSite);
-		Thread.sleep(1000);
-		click(saveSiteDataBtn);
-		Thread.sleep(1000);
-		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
-		boolean address1ErrorStatus = isElementPresent(address1Error);
-		boolean postcodeErrorStatus = isElementPresent(postcodeError);
-		Assert.assertTrue(siteNameErrorStatus && address1ErrorStatus && postcodeErrorStatus, 
-				"Validation messages for mandatory fields are not displaying");
-	}
-	public void validateAddressPostcodeMandatoryFieldsAddSitePopup() throws Throwable 
-	{
-		click(addSite);
-		Thread.sleep(1000);
-		setValue(siteName, "Patia");
-		click(saveSiteDataBtn);
-		Thread.sleep(1000);
-		boolean address1ErrorStatus = isElementPresent(address1Error);
-		boolean postcodeErrorStatus = isElementPresent(postcodeError);
-		Assert.assertTrue(address1ErrorStatus && postcodeErrorStatus, 
-				"Validation messages for mandatory fields are not displaying");
-	}
-	public void validateMandatorySiteNamePostcodeFieldsInAddSitePopup() throws Throwable {
-		click(addSite);
-		Thread.sleep(2000);
-		setValue(address1, "Patia");
-		click(saveSiteDataBtn);
-		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
-		boolean postcodeErrorStatus = isElementPresent(postcodeError);
-		Assert.assertTrue(siteNameErrorStatus && postcodeErrorStatus, 
-				"Validation messages for mandatory fields are not displaying");
-	}
-	public void validateMandatorySiteNameAddressFieldsInAddSitePopup() throws InterruptedException {
-		click(addSite);
-		Thread.sleep(2000);
-		setValue(postcode, "8723423");
-		Thread.sleep(1000);
-		System.out.println("Value in the textbox is " + driver.findElement(By.id("NewSite_Postcode")).getAttribute("value"));
-		/*click(saveSiteDataBtn);
-		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
-		boolean address1ErrorStatus = isElementPresent(address1Error);
-		Assert.assertTrue(siteNameErrorStatus && address1ErrorStatus, 
-				"Validation messages for mandatory fields are not displaying");*/
-	}
-	public void validateAddSitePopupDataProvider(String name, String addr1, String postCode, String siteContactNAME, 
-			String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteAREA) throws Throwable
-	{
-		SoftAssert s = new SoftAssert();
-		click(addSite);
-		Reporter.log("Clicked Add Site button", true);
-		Thread.sleep(2000);
-		setValue(siteName, name);
-		setValue(address1, addr1);
-		setValue(postcode, postCode);
-		setValue(siteContactName, siteContactNAME);
-		setValue(contactPhoneNo, contactPHONENo);
-		setValue(contactEmail, contactEMAIL);
-		setValue(siteID, site_ID);
-		setValue(address2, addr2);
-		setValue(address3, addr3);
-		setValue(address4, addr4);
-		setValue(siteArea, siteAREA);
-		Reporter.log("Entered data in various fields in 'Add Site' popup", true);
-		click(saveSiteDataBtn);
-		Reporter.log("Clicked save button", true);
-		if(getAttribute(siteName, "value").equals("")) {
-			boolean siteNameErr = isElementPresent(siteName_Error);
-			s.assertTrue(siteNameErr, "Error message for 'Site Name' field is not displaying");
-			Reporter.log("Checked if validation message for site name field is displaying", true);
-		}
-		if(getAttribute(address1, "value").equals("")) {
-			boolean addressErr = isElementPresent(address1Error);
-			s.assertTrue(addressErr, "Error message for 'Address' field is not displaying");
-			Reporter.log("Checked if validation message for address1 field is displaying", true);
-		}
-		if(getAttribute(postcode, "value").equals("")) {
-			boolean postcodeErr = isElementPresent(postcodeError);
-			s.assertTrue(postcodeErr, "Error message for 'postcode' field is not displaying");
-			Reporter.log("Checked if validation message for postcode field is displaying", true);
-		}
-		waitForElementInvisible(addNewSitePopup);
-		boolean popupDisplayStatus = isElementPresent(addNewSitePopup);
-		if(popupDisplayStatus) {
-			Assert.assertTrue(popupDisplayStatus, "Add site form is not getting saved");
-		}
-		List<WebElement> siteNames = driver.findElements(siteNameList);
-		boolean siteAddstatus = false;
-    	for (WebElement siteName: siteNames) {
-            if(siteName.getText().contains(name)==true) 
-            {
-            	siteAddstatus = true;
-            }
-        }
-		s.assertTrue(siteAddstatus, "Site not displaying in site table after creation");
-		Reporter.log("Checked if the site is displaying in site table after site creation", true);
-		s.assertAll();	
-	}
 	public void validateAddMeterDropdown() throws Throwable
 	{
 		SoftAssert softAssertion = new SoftAssert();

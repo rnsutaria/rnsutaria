@@ -17,7 +17,7 @@ public class SanityTests extends BaseTest {
 	public void PortfolioManagerDisplaysTest() {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
 
 	}
@@ -28,7 +28,7 @@ public class SanityTests extends BaseTest {
 		LoginPage loginPage = new LoginPage();
 
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
 	}*/

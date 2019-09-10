@@ -81,7 +81,8 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     public void verifyRegisteredAddressErrorSpaceTestData() {
     	setValue(companyRegisteredAddress, "       ");
         click(saveBtn);
-        Assert.assertEquals(true, isElementPresent(registeredAddressBlankError));
+        boolean regdAddrErrorDisplayStatus = isElementPresent(registeredAddressBlankError);
+        Assert.assertTrue(regdAddrErrorDisplayStatus, "Registered address is not displaying any error after entering 'space' as test data.");
     }
 
     public void verifyCompanyNameError(String value) {

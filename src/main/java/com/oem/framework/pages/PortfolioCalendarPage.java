@@ -56,7 +56,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
 		Assert.assertEquals(status, false);
     }
-	public void verifyspaceDataPortfolioCaledarEntryPopup(String data) throws InterruptedException
+	public void validateDescriptionWithDifferentTestDataPortfolioCaledarEntryPopup(String data) throws InterruptedException
 	{
 		click(addCalendarEntry);
 		Thread.sleep(2000);
@@ -65,7 +65,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		setValue(eventDescription, data);
 		click(saveBtn);
 		Assert.assertTrue(isElementExistInDropDown(eventDes_AllRecords, data), 
-				"The event was not saved");
+				"The calendar event was not saved.");
 	}
 	public void validateEventDescriptionPortfolioCaledarEntryPopup(String value) throws InterruptedException
 	{
@@ -106,9 +106,10 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		Reporter.log("compared description and date in the first row before delete and after deleting an event");		
 		Assert.assertEquals(false, status);
 	}
-	public void validateEditEventPopup(String value)
+	public void validateEditEventPopup(String value) throws Throwable
 	{
 		click(editEntry);
+		Thread.sleep(2000);
 		Reporter.log("clicked 'Edit Entry' button for first row");
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(edit_popup)) &&
                 getText(edit_popup).trim().contains(value),"Edit event popup heading: "+getText(edit_popup) +" but expected:"+value);
@@ -121,10 +122,9 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(close_PortfolioCalendarEntryPopup);
 		Reporter.log("Clicked close icon in edit entry popup");
 		Thread.sleep(2000);
-		boolean status = isElementPresent(edit_popup);
-		System.out.println("Is edit popup displaying: " + status);
+		boolean editPopUpDisplayStatus = isElementPresent(edit_popup);
 		Reporter.log("Checked if edit popup is still displaying");
-		Assert.assertEquals(false, status);		
+		Assert.assertFalse(editPopUpDisplayStatus, "Edit popup is still displaying after closing it.");		
 	}
 	public void validateEditEventChangingDate() throws InterruptedException
 	{

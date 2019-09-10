@@ -13,183 +13,181 @@ import org.testng.annotations.Test;
 public class CompanyProfileTest extends BaseTest {
 
 	@Test
-	public void PM_CP_TC_003() {
+	public void PM_CP_TC_003() throws Throwable {
 		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
 
 	}
 
 	@Test
-	public void PM_CP_TC_017() {
+	public void PM_CP_TC_017() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
 
 	}
 
 	@Test
-	public void PM_CP_TC_005() {
+	public void PM_CP_TC_005() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyRegisteredAddressError(
 				"The field Registered address must be a string with a maximum length of 200");
 	}
 
 	@Test
-	public void PM_CP_TC_007() {
+	public void PM_CP_TC_007() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyCompanyNameError("The Company name field is required.");
 	}
 
 	@Test
-	public void PM_CP_TC_006() {
+	public void PM_CP_TC_006() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyBlankRegisteredAddressError("Registered address field is required");
 
 	}
 
 	@Test
-	public void PM_CP_TC_009() {
+	public void PM_CP_TC_009() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyBlankPostcodeError("Postcode field is required");
 	}
 
 	@Test
-	public void PM_CP_TC_015() {
+	public void PM_CP_TC_015() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyCompRegistrationNumberError("Company registration number field is required");
 	}
 
 	@Test
-	public void PM_CP_TC_018() {
+	public void PM_CP_TC_018() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.uploadLogo();
 	}
 
 	@Test
-	public void PM_CP_TC_019()
+	public void PM_CP_TC_019() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validateOptionsSupplierInvoiceTo();
 	}
 	@Test
-	public void PM_CP_TC_021()
+	public void PM_CP_TC_021() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validateOptionsPrefferedSupplierPayment();
 	}
 	@Test
-	public void PM_CP_TC_022()
+	public void PM_CP_TC_022() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validateMandatoryPrefferedSupplierPayment();
 	}
 
 	@Test
-	public void PM_CP_TC_026() {
+	public void PM_CP_TC_026() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyLOATemplateDisplay("Letter of Authority Template");
 	}
 
 	@Test
-	public void PM_CP_TC_027() {
+	public void PM_CP_TC_027() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyExistingLOADisplay("Download Existing Letter Of Authority");
 	}
 
 	@Test
-	public void PM_CP_TC_028() {
+	public void PM_CP_TC_028() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		// companyProfilePage.click(By.id("LOAExpiresDate"));
 		companyProfilePage.verifyDatePickerDisplayLOAExpiresDate();
 	}
 
 	@Test
-	public void PM_CP_TC_029() {
+	public void PM_CP_TC_029() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.click(By.id("LOAExpiresDate"));
 		companyProfilePage.selectFutureDateCalender(27, 10, 2021);
 	}
 
 	@Test
-	public void PM_CP_TC_030() throws InterruptedException {
+	public void PM_CP_TC_030() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.click(By.id("LOAExpiresDate"));
 		companyProfilePage.selectPrevDateCalender(12, 5, 2017);
 	}
 
 	@Test
-	public void PM_CP_TC_031() {
+	public void PM_CP_TC_031() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyRegisteredAddressErrorSpaceTestData();
 	}
 
 	@Test
-	public void PM_CP_TC_032() {
+	public void PM_CP_TC_032() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.verifyBlankPostcodeError("Postcode field is required");
 	}
 
 	@Test(dataProvider = "getData")
 	public void dataDriven(String compName, String addr, String postCode, String ph, String regdNo)
-			throws InterruptedException {
+			throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.loginUsing("ando.laamitav@gmail.com", "amitav123");
+				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validateProfileDiffDataSets(compName, addr, postCode, ph, regdNo);
 	}
