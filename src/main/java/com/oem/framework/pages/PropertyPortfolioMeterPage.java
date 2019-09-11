@@ -17,7 +17,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
 	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
 	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]");
-	By saveMeter = By.id("save-meter-button");
+	By saveMeterBtn = By.id("save-meter-button");
 	/*Add HH Meter popup*/
 	By meterNumDropdownField = By.id("profileClass");
 	By meterNumSecondField = By.id("meterTimeSwitchCode");
@@ -40,6 +40,29 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By meterOperatorEndDate = By.id("meterOperatorEndDateForMeterModel");
 	By currentDataCollector = By.id("dataCollector");
 	By dataCollectorEndDate = By.id("dataCollectorEndDateForMeterModel");
+	
+	By gasMeterNumber = By.id("gasMeterNumber");
+	
+	public void addGasMeterUsingDifferentTestData(String gasMeterNumber, String procurementType, String expectedConsumption, 
+			String currentSupplier, int dayOfMonthOfContractEndDate, int monthNumberOfContractEndDate, int yearOfContractEndDate, 
+			String currentAnnualSpend) throws Throwable
+	{
+		SoftAssert softAssertion = new SoftAssert();
+		click(siteFirstRecord);
+		Thread.sleep(2000);
+		click(addMeter);
+		click(addHHMeter);
+		setValue(this.gasMeterNumber, gasMeterNumber);
+		selectByVisibleText(this.procurementType, procurementType);		
+		setValue(this.expectedConsumption, expectedConsumption);
+		selectByVisibleText(this.currentSupplier, currentSupplier);
+		click(contractEndDate);
+		selectFutureDateCalender(dayOfMonthOfContractEndDate, monthNumberOfContractEndDate, yearOfContractEndDate);
+		setValue(this.currentAnnualSpend, currentAnnualSpend);
+		
+		click(saveMeterBtn);
+		
+	}
 	
 	public void addHHMeterUsingDifferentTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
@@ -79,7 +102,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		selectByVisibleText(this.currentDataCollector, currentDataCollector);
 		Reporter.log("Entered data in various fields in Add HH Meter popup", true);
 		
-		click(saveMeter);
+		click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		if(getAttribute(meterNumSecondField, "value").equals("")) {
 			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
@@ -180,7 +203,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		setValue(this.currentAnnualSpend, currentAnnualSpend);
 		Reporter.log("Entered data in various fields in Add nHH Meter popup", true);
 		
-		click(saveMeter);
+		click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		if(getAttribute(meterNumSecondField, "value").equals("")) {
 			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");

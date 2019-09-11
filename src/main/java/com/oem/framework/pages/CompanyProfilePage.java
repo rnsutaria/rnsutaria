@@ -33,8 +33,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
     
-    By postCodeValidationError = By.xpath("//*[text() = 'Please enter valid postcode']");
-    
     public void fillCompanyProfile(){
         setValue(companyName,"abc");
         setValue(companyRegisteredAddress,"Bangalore");      
@@ -114,9 +112,11 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     public void validatePostcodeSpecialSymbolTest() {
     	setValue(compPostCode, "%<>#");
         click(saveBtn);
-        boolean invalidPostcodeErrorDisplayStatus = isElementPresent(postCodeValidationError);
+        String ariaInvalidAttributeStatus = getAttribute(compPostCode, "aria-invalid");
+        System.out.println("Aria-invalid status: " + ariaInvalidAttributeStatus);
         Reporter.log("Checked if error message for invalid postcode is displaying", true);
-        Assert.assertTrue(invalidPostcodeErrorDisplayStatus, "Invalid postcode error is not displaying.");
+        boolean errorMsgDisplayStatus = ariaInvalidAttributeStatus.equals("true");
+        Assert.assertTrue(errorMsgDisplayStatus, "Invalid postcode error is not displaying.");
     }
     
     public void validatePostcodeNumericDataTest() {
@@ -125,6 +125,41 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
     	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
     	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
+    }
+    
+    public void validateIfPhoneFieldMandatory() {
+    	setValue(phone, "");
+    	Reporter.log("Entered blank data in phone field", true);
+    	click(saveBtn);
+    	String errorStatus = getAttribute(phone, "aria-invalid");
+    	if(errorStatus == null) {
+    		errorStatus = "false";
+    	}
+    	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
+    	Reporter.log("Checked if error message for phone field is displaying", true);
+    	Assert.assertFalse(phoneErrorMsgDisplayStatus, "Error message for phone field is displaying even if it is not mandatory");
+    }
+    
+    public void validatePhoneFieldAlphabeticTestData() {
+    	setValue(phone, "Lorem Ipsum");
+    	Reporter.log("Entered alphabetic data in phone field", true);
+    	click(saveBtn);
+    	String errorStatus = getAttribute(phone, "aria-invalid");
+    	if(errorStatus == null) {
+    		errorStatus = "false";
+    	}
+    	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
+    	Reporter.log("Checked if error message for phone field is displaying", true);
+    	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after alphabetic data in it");
+    }
+    
+    public void validatePhoneFieldNumericTestData() {
+    	setValue(phone, "9872391239");
+    	Reporter.log("Entered alphabetic data in phone field", true);
+    	String enteredValue = getAttribute(phone, "value");
+    	boolean enteredValueDisplaystatus = enteredValue.equals("9872391239");
+    	Reporter.log("Checked if the value entered is displaying in 'phone' field", true);
+    	Assert.assertTrue(enteredValueDisplaystatus, "The entered value is not displaying in phone field");
     }
     
     public void verifyCompRegistrationNumberError(String value) {

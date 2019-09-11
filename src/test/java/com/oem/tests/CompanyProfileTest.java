@@ -96,14 +96,30 @@ public class CompanyProfileTest extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validatePostcodeNumericDataTest();
 	}
-	/*@Test
+	@Test
 	public void PM_CP_TC_012() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.validateIfPhoneFieldMandatory();
-	}*/
+	}
+	@Test
+	public void PM_CP_TC_013() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validatePhoneFieldAlphabeticTestData();
+	}
+	@Test
+	public void PM_CP_TC_014() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validatePhoneFieldNumericTestData();
+	}
 
 	@Test
 	public void PM_CP_TC_015() throws Throwable {

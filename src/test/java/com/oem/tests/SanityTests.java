@@ -33,12 +33,12 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 	@Test
-	public void PM_CP_TC_011() throws Throwable {
+	public void PM_CP_TC_013() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.validatePostcodeNumericDataTest();
+		companyProfilePage.validatePhoneFieldAlphabeticTestData();
 	}
 	
 	

@@ -10,7 +10,7 @@ public class CustomerDashboardPage extends BasePage {
     By companyProfile=By.linkText("Company Profile");
     By portfolioCalendar = By.linkText("Portfolio Calendar");
     By propertyPortfolio = By.linkText("Property Portfolio");
-
+    By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 
 
     public CustomerDashboardPage goToCompanyProfile(){
@@ -37,6 +37,14 @@ public class CustomerDashboardPage extends BasePage {
         return propertyPortfolioPage;
     }
 
+    public CustomerDashboardPage goToPropertyPortfolioMeterPage(){
+        click(portfolioMgr);
+        click(propertyPortfolio);
+        click(siteFirstRecord);
+        PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
+        propertyPortfolioMeterPage.isLoaded();
+        return propertyPortfolioMeterPage;
+    }
 
 
 

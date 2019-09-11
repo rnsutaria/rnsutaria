@@ -191,17 +191,17 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     }
     /**
      * Used to select a future date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
-     * @param date
-     * @param month
+     * @param dayOfMonth
+     * @param monthNumber
      * @param year
      */
-    public void selectFutureDateCalender(int date, int month, int year)
+    public void selectFutureDateCalender(int dayOfMonth, int monthNumber, int year)
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + month + "' and @data-year = '" + year + "']/a[text() = '" + date + "']")).click();//Sep 25, 2019
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//Sep 25, 2019
 				break;
 			}
 			catch(Exception e)
@@ -213,17 +213,17 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 	}
     /**
      * Used to select a previous date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
-     * @param date
-     * @param month
+     * @param dayOfMonth
+     * @param monthNumber
      * @param year
      */
-    public void selectPrevDateCalender(int date, int month, int year) 
+    public void selectPrevDateCalender(int dayOfMonth, int monthNumber, int year) 
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + month + "' and @data-year = '" + year + "']/a[text() = '" + date + "']")).click();//March 7, 2016
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//March 7, 2016
 				break;
 			}
 			catch(Exception e)
