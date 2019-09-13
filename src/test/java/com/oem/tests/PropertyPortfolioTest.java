@@ -67,7 +67,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @param addr4
 	 * @param siteArea
 	 * @throws Throwable
-	 *//*
+	 */
 	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_013
 	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
@@ -137,7 +137,7 @@ public class PropertyPortfolioTest extends BaseTest {
 				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddnHHMeterPopup();
-	}*/
+	}
 	@Test(dataProvider = "getNHHData")
 	public void executeAddNHHUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
@@ -156,6 +156,7 @@ public class PropertyPortfolioTest extends BaseTest {
 				{"03", "345", "462", "12", "0005", "2005", "514", "Combined Flexible", "4800", "Scottish and Southern", "5500"}};
 		return data;
 	}
+	
 	
 	
 }

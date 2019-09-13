@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
@@ -57,7 +58,10 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         driver.findElement(by).clear();
     }
     
-
+    /**
+     * Click on a particular webelement by entering its locator as argument.
+     * @param by
+     */
     public void click(By by){
         waitForElementPresent(by);
         driver.findElement(by).click();
@@ -282,6 +286,28 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
             }
         }
     	return status;
+    }
+    /**
+     * Used to check if the list contains the value
+     * @param locator identifying all elements of list
+     * @param value
+     * @return boolean
+     */
+    public boolean isElementExistInList(By locator, String value)
+    {
+    	List<WebElement> allElements = driver.findElements(locator);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+            if(element.getText().contains(value)==true) 
+            {
+            	status = true;
+            }
+        }
+    	return status;
+    }
+    public void actionsClick(By locator) {
+    	Actions actions = new Actions(driver);
+    	actions.moveToElement((WebElement) locator).click().build().perform();
     }
 }
 
