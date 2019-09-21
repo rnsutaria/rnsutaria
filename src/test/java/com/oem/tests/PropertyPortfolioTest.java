@@ -122,14 +122,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		{"00", "", "", "", "", "", "", "Flexible", "2500", "F&S Energy", "3500", "3200", "Bury Metering Services Limited", "Energy Assets"}};
 		return data;
 	}
-	@Test
-	public void validateAddnHHMeterPopup1() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateAddnHHMeterPopup();
-	}
+	
 	@Test
 	public void validateAddnHHMeterPopup2() throws Throwable {
 		LoginPage loginPage = new LoginPage();
