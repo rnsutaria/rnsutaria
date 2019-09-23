@@ -12,7 +12,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
 	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
-	By saveSiteDataBtn = By.id("save-btn");
+	By saveSiteDataBtn = By.id("save-btn"); 
 	By siteName = By.id("NewSite_Name");
 	By siteName_Error = By.id("NewSite_Name-error");
 	By address1 = By.id("NewSite_Address1");
@@ -317,11 +317,11 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		setValue(postcode, "8723423");
 		Thread.sleep(1000);
 		System.out.println("Value in the textbox is " + driver.findElement(By.id("NewSite_Postcode")).getAttribute("value"));
-		/*click(saveSiteDataBtn);
+		click(saveSiteDataBtn);
 		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
 		boolean address1ErrorStatus = isElementPresent(address1Error);
 		Assert.assertTrue(siteNameErrorStatus && address1ErrorStatus, 
-				"Validation messages for mandatory fields are not displaying");*/
+				"Validation messages for mandatory fields are not displaying");
 	}
 	public void validateAddSitePopupDataProvider(String name, String addr1, String postCode, String siteContactNAME, 
 			String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteAREA) throws Throwable
@@ -397,19 +397,6 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		softAssertion.assertTrue(waterPresenceStatus, "Water utility is not displaying in 'Add Meter' dropdown");
 		Reporter.log("Checked if 'Water' utility is displaying in 'Add Meter' dropdown", true);
 		softAssertion.assertAll();
-	}
-	public void validateAddHHMeterPopup() throws Throwable
-	{
-		click(siteFirstRecord);
-		Reporter.log("Clicked on the first site present in the Property Portfolio page", true);
-		Thread.sleep(2000);
-		click(addMeter);
-		Reporter.log("Clicked on Add Meter dropdown");
-		Thread.sleep(1000);
-		click(addHHMeter);
-		Reporter.log("Clicked on HH Electric", true);
-		verifyElementPresent(currentMeterOperator_HH);
-		Reporter.log("Checked if Add Meter popup for HH Electric is displaying by checking the presence of 'Current Meter Utility' field in the popup");
 	}
 	public void validateAddnHHMeterPopup() throws Throwable
 	{

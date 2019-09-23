@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.asserts.SoftAssert;
 
 public class CompanyProfilePage extends CustomerDashboardPage {
 
@@ -60,7 +61,17 @@ public class CompanyProfilePage extends CustomerDashboardPage {
            }
 
     }
-
+    
+    public void verifyRegisteredAddressInputs()	{
+    	setValue(companyRegisteredAddress, "Domlur");
+    	Reporter.log("Entered value in registered address field", true);
+    	String valueAttributevalue = getAttribute(companyRegisteredAddress, "value");
+    	Reporter.log("Stored the value of value attribute in a string variable", true);
+        boolean inputDisplayStatus = valueAttributevalue.contains("Domlur");
+        Reporter.log("Compared if the entered data is equal to the value of value attribute", true);
+        Assert.assertTrue(inputDisplayStatus, "Registered address is not displaying the value we entered in the field");
+    }
+    
     public void verifyRegisteredAddressError(String value){
     	setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
         click(saveBtn);
@@ -96,13 +107,19 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Assert.assertTrue(displayStatus, "Company Name field is not accepting alphabetic characters");
     }
     
-    public void verifyBlankPostcodeError(String value) {
+    public void verifyBlankPostcodeError(String value) { 
     	
-    	//setValue(compPostCode, "");
-    	setValue(compPostCode, "    ");
+    	setValue(compPostCode, "");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
+    }
+    public void verifyPostcodeWithSpaceTestData() {
+    	
+    	setValue(compPostCode, "    ");
+        click(saveBtn);
+        boolean postCodeErrorDisplayStatus = isElementPresent(postCodeError);
+    	Assert.assertTrue(postCodeErrorDisplayStatus, "Error message for postcode field is not displaying on entering space test data");
     }
     
     public void validatePostcodeSpecialSymbolTest() {
@@ -127,10 +144,12 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	setValue(phone, "");
     	Reporter.log("Entered blank data in phone field", true);
     	click(saveBtn);
+    	Reporter.log("Clicked save button", true);
     	String errorStatus = getAttribute(phone, "aria-invalid");
     	if(errorStatus == null) {
     		errorStatus = "false";
     	}
+    	Reporter.log("Strored the value of the aria-invalid attribute in a string variable", true);
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
     	Assert.assertFalse(phoneErrorMsgDisplayStatus, "Error message for phone field is displaying even if it is not mandatory");
@@ -212,14 +231,33 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
+    	SoftAssert softAssertion = new SoftAssert();
     	setValue(companyName, compName);
+    	softAssertion.assertTrue(getAttribute(companyName, "value").equals(compName), 
+        		"The entered data is not displaying correctly in 'Company Name' field");
+        Reporter.log("Checked if the entered is displaying correctly in 'Company Name' field", true);
         setValue(companyRegisteredAddress, addr);
+        softAssertion.assertTrue(getAttribute(companyRegisteredAddress, "value").equals(addr), 
+        		"The entered data is not displaying correctly in 'Company Registered Address' field");
+        Reporter.log("Checked if the entered is displaying correctly in 'Company Registered Address' field", true);
         setValue(compPostCode, postCode);
+        softAssertion.assertTrue(getAttribute(compPostCode, "value").equals(postCode), 
+        		"The entered data is not displaying correctly in 'Postcode' field");
+        Reporter.log("Checked if the entered is displaying correctly in 'Postcode' field", true);
         setValue(phone, ph);
+        softAssertion.assertTrue(getAttribute(phone, "value").equals(ph), 
+        		"The entered data is not displaying correctly in 'Phone' field");
+        Reporter.log("Checked if the entered is displaying correctly in 'Phone' field", true);
         setValue(companyRegNum, regdNo);
+        softAssertion.assertTrue(getAttribute(companyRegNum, "value").equals(regdNo), 
+        		"The entered data is not displaying correctly in 'Company Registration Number' field");
+        Reporter.log("Checked if the entered is displaying correctly in 'Company Registration Number' field", true);
         click(saveBtn);
+        Reporter.log("Clicked on save button", true);
         Thread.sleep(2000);
-        Assert.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn’t appear after saving profile data.");   	
+        softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn’t appear after saving profile data.");
+        Reporter.log("Checked if the save success popup is displaying", true);
+        softAssertion.assertAll();
     }
     
     

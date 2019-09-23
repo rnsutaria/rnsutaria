@@ -11,7 +11,7 @@ public class CustomerDashboardPage extends BasePage {
     By portfolioCalendar = By.linkText("Portfolio Calendar");
     By propertyPortfolio = By.linkText("Property Portfolio");
     By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
-
+    By tipCloseBtn = By.xpath("//p[text() = 'Tip 1 of 1']/following-sibling::a");
 
     public CustomerDashboardPage goToCompanyProfile(){
         click(portfolioMgr);
@@ -37,13 +37,20 @@ public class CustomerDashboardPage extends BasePage {
         return propertyPortfolioPage;
     }
 
-    public CustomerDashboardPage goToPropertyPortfolioMeterPage(){
+    public CustomerDashboardPage goToPropertyPortfolioMeterPage() throws Throwable{
         click(portfolioMgr);
         click(propertyPortfolio);
         click(siteFirstRecord);
+        Thread.sleep(2000);
+        try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
-        return propertyPortfolioMeterPage;
+        return propertyPortfolioMeterPage; 
     }
 
 

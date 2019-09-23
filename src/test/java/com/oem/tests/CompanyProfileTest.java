@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CompanyProfileTest extends BaseTest {
+public class CompanyProfileTest extends BaseTest { 
 
 	@Test
 	public void PM_CP_TC_003() throws Throwable {
@@ -21,14 +21,13 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_017() throws Throwable {
+	public void PM_CP_TC_004() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.fillCompanyProfile();
-
+		companyProfilePage.verifyRegisteredAddressInputs();
 	}
 
 	@Test
@@ -230,8 +229,8 @@ public class CompanyProfileTest extends BaseTest {
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyBlankPostcodeError("Postcode field is required");
-	}
+		companyProfilePage.verifyPostcodeWithSpaceTestData();
+	} 
 
 	@Test(dataProvider = "getData")
 	public void fillCompanyProfileWithDifferentDataTest(String compName, String addr, String postCode, String ph, String regdNo)

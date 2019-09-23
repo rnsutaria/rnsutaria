@@ -56,6 +56,17 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
 		Assert.assertEquals(status, false);
     }
+	public void verifyDateInEventDate() throws Throwable {
+		click(addCalendarEntry);
+		Thread.sleep(1000);
+		click(eventDate);
+		selectFutureDateCalender(18, 6, 2020);
+		String dateData = getAttribute(eventDate, "value");
+		Reporter.log("Stored the data present in value attribut of event date field", true);
+		boolean dateDisplayStatus = dateData.contains("18/07/2020");
+		Reporter.log("Checked if the value attribute contains the same date we entered in the date picker", true);
+		Assert.assertTrue(dateDisplayStatus, "Incorrect date is displaying after choosing date in date picker");
+	}
 	public void validateDescriptionWithDifferentTestDataPortfolioCaledarEntryPopup(String data) throws InterruptedException
 	{
 		click(addCalendarEntry);

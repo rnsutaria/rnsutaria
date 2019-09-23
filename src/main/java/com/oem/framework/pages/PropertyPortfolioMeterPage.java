@@ -19,7 +19,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By addHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[1]");
 	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
 	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
-	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]");
+	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]"); 
 	By saveMeterBtn = By.id("save-meter-button");
 	/*Add HH & nHH Meter popup*/
 	By meterNumDropdownField = By.id("profileClass");

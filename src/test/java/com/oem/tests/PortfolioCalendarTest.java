@@ -26,13 +26,21 @@ public class PortfolioCalendarTest extends BaseTest{
 		portfolioCalendarPage.verifyPortfolioCalendarEntrypopup(
 				"Add new portfolio calendar entry");
 	}
-	@Test
+	@Test 
 	public void PM_PC_TC_005() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
 		portfolioCalendarPage.verifyCloseBtnPortfolioCalendarEntrypopup();
+	}
+	@Test
+	public void PM_PC_TC_007() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
+		portfolioCalendarPage.verifyDateInEventDate();
 	}
 	@Test
 	public void PM_PC_TC_008() throws Throwable {
@@ -99,7 +107,7 @@ public class PortfolioCalendarTest extends BaseTest{
 		portfolioCalendarPage.validateEditEventChangingDescription();
 	}
 	@Test(dataProvider = "getData")
-	public void PM_PC_TC_006(String description) throws Throwable {
+	public void addCalendarEventUsingDataProviderTest(String description) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();

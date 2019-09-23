@@ -157,6 +157,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         }
         return true;
     }
+    
     @Override
     protected void load() {
 

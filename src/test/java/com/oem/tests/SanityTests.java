@@ -4,6 +4,10 @@ import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.CompanyProfilePage;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
+import com.oem.framework.pages.PortfolioCalendarPage;
+import com.oem.framework.pages.PropertyPortfolioMeterPage;
+import com.oem.framework.pages.PropertyPortfolioPage;
+
 import org.testng.annotations.Test;
 
 public class SanityTests extends BaseTest {
@@ -27,14 +31,14 @@ public class SanityTests extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
 	}*/
+
 	@Test
-	public void PM_CP_TC_013() throws Throwable {
+	public void PM_PP_TC_015() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.validatePhoneFieldAlphabeticTestData();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateAddHHMeterPopup();
 	}
-	
 	
 }
