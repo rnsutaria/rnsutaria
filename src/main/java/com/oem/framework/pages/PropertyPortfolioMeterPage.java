@@ -359,31 +359,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		int gasMetersCount = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		Reporter.log("Stored total number of gas meters as displayed in filter before adding a gas meter", true);
-		click(addMeter);
-		Reporter.log("Clicked on 'Add Meter' dropdown", true);
-		click(addGasMeter);
-		Reporter.log("Clicked on 'Gas' in Add Meter dropdown", true);
-		Thread.sleep(1000);
-		String gasMeterNum = readExcelData("Sheet3",4,2);
-		setValue(gasMeterNumber, gasMeterNum);
-		Reporter.log("Entered in MPRN number in Add Gas Meter dropdown", true);
-		selectByVisibleText(procurementType, readExcelData("Sheet3",4,3));
-		Reporter.log("Selected procurement type in Add Gas Meter dropdown", true);
-		setValue(expectedConsumption, readExcelData("Sheet3",4,4));
-		Reporter.log("Entered 'Expected Consumption' in Add Gas Meter dropdown", true);
-		selectByVisibleText(gasCurrentSuppliers, readExcelData("Sheet3",4,5));
-		Reporter.log("Selected 'Current Supplier' in Add Gas Meter dropdown", true);
-		click(contractEndDate);
-		Reporter.log("Clicked on 'Contract End Date' to show date picker in Add Gas Meter dropdown", true);
-		selectFutureDateCalender(Integer.parseInt(readExcelData("Sheet3",4,6)), Integer.parseInt(readExcelData("Sheet3",4,7)), Integer.parseInt(readExcelData("Sheet3",4,8)));
-		Reporter.log("Selected 'Contract End Date' from the date picker in Add Gas Meter dropdown", true);
-		setValue(currentAnnualSpend, readExcelData("Sheet3",4,9));
-		Reporter.log("Entered 'Current Annual Spend' in Add Gas Meter dropdown", true);
-		click(saveMeterBtn);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		softAssertion.assertTrue(isElementPresent(meterSavedPopup), "Meter saved successfully is not displaying");
-		click(okBtn);
-		Reporter.log("Clicked Ok button in popup after adding meter successfully", true);
+		String gasMeterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
 		int newGasMetersCount = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		Reporter.log("Stored total number of gas meters as displayed in filter after adding a gas meter", true);
@@ -399,11 +375,12 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	/*PM_PP_TC_087*/
 	public void addExpiredGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
+		Random random = new Random();
 		click(addMeter);
 		Reporter.log("Clicked on 'Add Meter' dropdown", true);
 		click(addGasMeter);
 		Reporter.log("Clicked on 'Gas' in Add Meter dropdown", true);
-		String gasMeterNum = readExcelData("Sheet3",5,2);
+		String gasMeterNum = String.valueOf(random.nextInt(1000000000));;
 		setValue(gasMeterNumber, gasMeterNum);
 		Reporter.log("Entered in MPRN number in Add Gas Meter dropdown", true);
 		selectByVisibleText(procurementType, readExcelData("Sheet3",5,3));
@@ -432,31 +409,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	/*PM_PP_TC_088*/
 	public void checkSavedDetailsAfterAddingGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-		click(addMeter);
-		Reporter.log("Clicked on 'Add Meter' dropdown", true);
-		click(addGasMeter);
-		Reporter.log("Clicked on 'Gas' in Add Meter dropdown", true);
-		String gasMeterNum = readExcelData("Sheet3",3,2);
-		setValue(gasMeterNumber, gasMeterNum);
-		Reporter.log("Entered in MPRN number in Add Gas Meter dropdown", true);
-		selectByVisibleText(procurementType, readExcelData("Sheet3",3,3));
-		Reporter.log("Selected procurement type in Add Gas Meter dropdown", true);
-		String expectedConsumptionGasMeter = readExcelData("Sheet3",3,4);
-		setValue(expectedConsumption, expectedConsumptionGasMeter);
-		Reporter.log("Entered 'Expected Consumption' in Add Gas Meter dropdown", true);
-		selectByVisibleText(gasCurrentSuppliers, readExcelData("Sheet3",3,5));
-		Reporter.log("Selected 'Current Supplier' in Add Gas Meter dropdown", true);
-		click(contractEndDate);
-		Reporter.log("Clicked on 'Contract End Date' to show date picker in Add Gas Meter dropdown", true);
-		selectFutureDateCalender(Integer.parseInt(readExcelData("Sheet3",3,6)), Integer.parseInt(readExcelData("Sheet3",3,7)), Integer.parseInt(readExcelData("Sheet3",3,8)));
-		Reporter.log("Selected 'Contract End Date' from the date picker in Add Gas Meter dropdown", true);
-		setValue(currentAnnualSpend, readExcelData("Sheet3",3,9));
-		Reporter.log("Entered 'Current Annual Spend' in Add Gas Meter dropdown", true);
-		click(saveMeterBtn);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		softAssertion.assertTrue(isElementPresent(meterSavedPopup), "Meter saved successfully is not displaying");
-		click(okBtn);
-		Reporter.log("Clicked Ok button in popup after adding meter successfully", true);
+		String gasMeterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
 		viewMeterDetails(gasMeterNum);
 		Reporter.log("Clicked on meter number to see the details of the meter", true);
@@ -632,15 +585,9 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	
 	public void validateAddnHHMeterPopupUsingDifferentTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType, String expectedConsumption, 
-			String currentSupplier, int dayOfMonthOfContractEndDate, int monthNumberOfContractEndDate, int yearOfContractEndDate, 
-			String currentAnnualSpend) throws Throwable	{
+			String currentSupplier, String currentAnnualSpend) throws Throwable	{
+		
 		SoftAssert softAssertion = new SoftAssert();
-		try {
-			click(tipCloseBtn);
-		}
-		catch(Exception e) {
-			System.out.println("Couldn't close 'Tip' message");
-		}
 		click(addMeter);
 		Reporter.log("Clicked on add meter dropdown.", true);
 		click(addnHHMeter);
@@ -669,11 +616,6 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		
 		setValue(this.expectedConsumption, expectedConsumption);
 		Reporter.log("Entered value in expected consumption", true);
-		click(contractEndDate);
-		Reporter.log("Clicked on contract end date field", true);
-		Thread.sleep(1000);
-		selectFutureDateCalender(dayOfMonthOfContractEndDate, monthNumberOfContractEndDate, yearOfContractEndDate);
-		Reporter.log("Entered date in the date picker", true);
 		selectByVisibleText(this.currentSupplier, currentSupplier);
 		Reporter.log("Selected current supplier from supplier dropdown", true);
 		setValue(this.currentAnnualSpend, currentAnnualSpend);
@@ -683,7 +625,125 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		if(getAttribute(meterNumSecondField, "value").equals("")) {
 			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
-			if(meterNumSecondFieldErrorStatus.isEmpty())
+			if(meterNumSecondFieldErrorStatus == null)
+				meterNumSecondFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumSecondFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSecondField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meterNumSecondField", true);
+		}
+		if(getAttribute(meterNumThirdField, "value").equals("")) {
+			String meterNumThirdFieldErrorStatus = getAttribute(meterNumThirdField, "aria-invalid");
+			if(meterNumThirdFieldErrorStatus == null)
+				meterNumThirdFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumThirdFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumThirdField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meterNumThirdField", true);
+		}
+		if(getAttribute(meterNumFourthField, "value").equals("")) {
+			String meterNumFourthFieldErrorStatus = getAttribute(meterNumFourthField, "aria-invalid");
+			if(meterNumFourthFieldErrorStatus == null)
+				meterNumFourthFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumFourthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFourthField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meterNumFourthField", true);
+		}
+		if(getAttribute(meterNumFifthField, "value").equals("")) {
+			String meterNumFifthFieldErrorStatus = getAttribute(meterNumFifthField, "aria-invalid");
+			if(meterNumFifthFieldErrorStatus == null)
+				meterNumFifthFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumFifthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFifthField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meterNumFifthField", true);
+		}
+		if(getAttribute(meterNumSixthField, "value").equals("")) {
+			String meterNumSixthFieldErrorStatus = getAttribute(meterNumSixthField, "aria-invalid");
+			if(meterNumSixthFieldErrorStatus == null)
+				meterNumSixthFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumSixthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSixthField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meterNumSixthField", true);
+		}
+		if(getAttribute(meterNumSeventhField, "value").equals("")) {
+			String meterNumSeventhFieldErrorStatus = getAttribute(meterNumSeventhField, "aria-invalid");
+			if(meterNumSeventhFieldErrorStatus == null)
+				meterNumSeventhFieldErrorStatus = "true";
+			softAssertion.assertTrue(meterNumSeventhFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSeventhField is not displaying");
+			Reporter.log("Checked if error expression is displaying for meter num seventh Field", true);
+		}
+		if(getAttribute(this.expectedConsumption, "value").equals("")) {
+			String expectedConsumptionFieldErrorStatus = getAttribute(this.expectedConsumption, "aria-invalid");
+			if(expectedConsumptionFieldErrorStatus == null)
+				expectedConsumptionFieldErrorStatus = "true";
+			softAssertion.assertTrue(expectedConsumptionFieldErrorStatus.equals("true"), "Mandatory expression while validating Expected Consumption is not displaying");
+			Reporter.log("Checked if error expression is displaying for Expected Consumption", true);
+		}
+		if(getAttribute(this.contractEndDate, "value").equals("")) {
+			String contractEndDateFieldErrorStatus = getAttribute(this.contractEndDate, "aria-invalid");
+			if(contractEndDateFieldErrorStatus == null)
+				contractEndDateFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contract End Date", true);
+		}
+		/*boolean invalidMPANPopupDisplayStatus = isElementPresent(invalidMPANPopup);
+		softAssertion.assertTrue(invalidMPANPopupDisplayStatus, "Invalid MPAN popup is not displaying");
+		Reporter.log("Checked if pop for invalid popup is displayed", true);
+		
+		boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
+		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
+		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);*/
+		
+		softAssertion.assertAll();
+		
+	}
+	/*PM_PP_TC_066*/
+	public void validateAllMandatoryFieldsAddNHHPopup() throws Throwable {
+		click(addMeter);
+		Reporter.log("Clicked on add meter dropdown.", true);
+		click(addnHHMeter);
+		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
+		Thread.sleep(1000);
+		click(saveMeterBtn);
+		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		mandatoryFieldValidationAddNHHMeterGeneric();
+		Reporter.log("Checked validation for all mandatory fields", true);
+	}
+	/*PM_PP_TC_067*/
+	public void validateMandatoryFieldsExcludingTopMeterNumbFieldsAddNHHPopup() throws Throwable {
+		click(addMeter);
+		Reporter.log("Clicked on add meter dropdown.", true);
+		click(addnHHMeter);
+		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
+		Thread.sleep(1000);
+		setValue(meterNumSecondField, "234");
+		Reporter.log("Entered data in meter number second field", true);
+		setValue(meterNumThirdField, "978");
+		Reporter.log("Entered data in meter number third field", true);
+		click(saveMeterBtn);
+		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		mandatoryFieldValidationAddNHHMeterGeneric();
+		Reporter.log("Checked validation for all mandatory fields", true);
+	}
+	/*PM_PP_TC_068*/
+	public void validateMandatoryFieldsExcludingCoreMeterNumbFieldsAddNHHPopup() throws Throwable {
+		click(addMeter);
+		Reporter.log("Clicked on add meter dropdown.", true);
+		click(addnHHMeter);
+		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
+		Thread.sleep(1000);
+		setValue(meterNumFourthField, "10");
+		Reporter.log("Entered data in meter number fourth field", true);
+		setValue(meterNumFifthField, "1293");
+		Reporter.log("Entered data in meter number fifth field", true);
+		setValue(meterNumSixthField, "5556");
+		Reporter.log("Entered data in meter number sixth field", true);
+		setValue(meterNumSeventhField, "271");
+		Reporter.log("Entered data in meter number seventh field", true);
+		click(saveMeterBtn);
+		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		mandatoryFieldValidationAddNHHMeterGeneric();
+		Reporter.log("Checked validation for all mandatory fields", true);
+	}
+	
+	public void mandatoryFieldValidationAddNHHMeterGeneric() {
+		SoftAssert softAssertion = new SoftAssert();
+		if(getAttribute(meterNumSecondField, "value").equals("")) {
+			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
+			if(meterNumSecondFieldErrorStatus == null)
 				meterNumSecondFieldErrorStatus = "true";
 			softAssertion.assertTrue(meterNumSecondFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSecondField is not displaying");
 			Reporter.log("Checked if error expression is displaying for meterNumSecondField", true);
@@ -737,35 +797,14 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date is not displaying");
 			Reporter.log("Checked if error expression is displaying for Contract End Date", true);
 		}
-		boolean invalidMPANPopupDisplayStatus = isElementPresent(invalidMPANPopup);
-		softAssertion.assertTrue(invalidMPANPopupDisplayStatus, "Invalid MPAN popup is not displaying");
-		Reporter.log("Checked if pop for invalid popup is displayed", true);
-		
-		boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
-		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
-		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);
-		
 		softAssertion.assertAll();
-		
-	}
-	
-	public void validateMandatoryFieldAddNHHMeter() {
-		
-		
-		
 	}
 	public void addValidNHHMeterGeneric() throws Throwable {
 		
 		Random random = new Random();
 		//int cellNum = random.nextInt(1568);
-		String mpanNumber = readExcelData("Sheet2", 0, 0);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
 		Thread.sleep(2000);
-		try {
-			click(tipCloseBtn);
-		}
-		catch(Exception e) {
-			System.out.println("Couldn't close 'Tip' message");
-		}
 		click(addMeter);
 		Reporter.log("Clicked on add meter dropdown.", true);
 		click(addnHHMeter);
