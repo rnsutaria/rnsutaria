@@ -565,16 +565,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");
 			Reporter.log("Checked if error expression is displaying for Capacity", true);
 		}
-		
-		/*if(getAttribute(meterNumSecondField, "aria-invalid").equals("false") && 
-				getAttribute(meterNumThirdField, "aria-invalid").equals("false") && 
-				getAttribute(meterNumFourthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumFifthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumSixthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumSeventhField, "aria-invalid").equals("false")) {
-			boolean validMPANStatus = isElementPresent();
-		}*/
-		
+				
 		boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
 		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
 		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);
@@ -592,6 +583,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on add meter dropdown.", true);
 		click(addnHHMeter);
 		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
+		Thread.sleep(1000);
 		selectByVisibleText(meterNumDropdownField, meterNoDropdownFieldValue);		
 		setValue(meterNumSecondField, meterNoSecondField);
 		setValue(meterNumThirdField, meterNoThirdField);
@@ -687,23 +679,10 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
 		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);*/
 		
-		softAssertion.assertAll();
-		
+		softAssertion.assertAll();																										
 	}
-	/*PM_PP_TC_066*/
-	public void validateAllMandatoryFieldsAddNHHPopup() throws Throwable {
-		click(addMeter);
-		Reporter.log("Clicked on add meter dropdown.", true);
-		click(addnHHMeter);
-		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
-		Thread.sleep(1000);
-		click(saveMeterBtn);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		mandatoryFieldValidationAddNHHMeterGeneric();
-		Reporter.log("Checked validation for all mandatory fields", true);
-	}
-	/*PM_PP_TC_067*/
-	public void validateMandatoryFieldsExcludingTopMeterNumbFieldsAddNHHPopup() throws Throwable {
+	/*PM_PP_TC_071*/
+	public void validateExpectedConsumptionMandatoryFieldAddNHHPopup() throws Throwable {
 		click(addMeter);
 		Reporter.log("Clicked on add meter dropdown.", true);
 		click(addnHHMeter);
@@ -713,18 +692,6 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Entered data in meter number second field", true);
 		setValue(meterNumThirdField, "978");
 		Reporter.log("Entered data in meter number third field", true);
-		click(saveMeterBtn);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		mandatoryFieldValidationAddNHHMeterGeneric();
-		Reporter.log("Checked validation for all mandatory fields", true);
-	}
-	/*PM_PP_TC_068*/
-	public void validateMandatoryFieldsExcludingCoreMeterNumbFieldsAddNHHPopup() throws Throwable {
-		click(addMeter);
-		Reporter.log("Clicked on add meter dropdown.", true);
-		click(addnHHMeter);
-		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
-		Thread.sleep(1000);
 		setValue(meterNumFourthField, "10");
 		Reporter.log("Entered data in meter number fourth field", true);
 		setValue(meterNumFifthField, "1293");
@@ -733,13 +700,18 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Entered data in meter number sixth field", true);
 		setValue(meterNumSeventhField, "271");
 		Reporter.log("Entered data in meter number seventh field", true);
+		click(contractEndDate);
+		Reporter.log("Clicked on contract end date field", true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(16, 5, 2020);
+		Reporter.log("Selected date from date picker", true);
 		click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		mandatoryFieldValidationAddNHHMeterGeneric();
+		validateMandatoryFieldAddNHHMeterGeneric();
 		Reporter.log("Checked validation for all mandatory fields", true);
 	}
 	
-	public void mandatoryFieldValidationAddNHHMeterGeneric() {
+	public void validateMandatoryFieldAddNHHMeterGeneric() {
 		SoftAssert softAssertion = new SoftAssert();
 		if(getAttribute(meterNumSecondField, "value").equals("")) {
 			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
@@ -799,7 +771,24 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		}
 		softAssertion.assertAll();
 	}
-	public void addValidNHHMeterGeneric() throws Throwable {
+	
+	public void checkSavedDetailsAfterAddingNHHMeter() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		String mpanNumber = addValidNHHMeterGeneric();
+		Reporter.log("Added a valid NHH meter and stored MPAN number in a variable.", true);
+		viewMeterDetails(mpanNumber);
+		Reporter.log("Clicked on the MPAN number to view the meter details.", true);
+		boolean AMRDataUploaderDisplayStatus = isElementPresent(AMRdataUploaderBtn(mpanNumber));
+		Reporter.log("Checked if AMR Data Uploader button is displaying.", true);
+		softAssertion.assertTrue(AMRDataUploaderDisplayStatus, "AMR Data Uploader button is not displaying");
+		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addContractHistoryBtn(mpanNumber));
+		Reporter.log("Checked if 'Add Contract History' button is displaying.", true);
+		softAssertion.assertTrue(addContractHistoryBtnDisplayStatus, "'Add Contract History' button is not displaying");
+		
+		softAssertion.assertAll();
+	}
+	
+	public String addValidNHHMeterGeneric() throws Throwable {
 		
 		Random random = new Random();
 		//int cellNum = random.nextInt(1568);
@@ -817,24 +806,25 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		Reporter.log("Entered data in 7 fields for meter number", true);
-		selectByVisibleText(this.procurementType, "Fixed");
+		selectByVisibleText(procurementType, "Fixed");
 		Reporter.log("Entered procurement type", true);
 		
-		
-		setValue(this.expectedConsumption, String.valueOf(random.nextInt(5000)));
+
+		setValue(expectedConsumption, String.valueOf(random.nextInt(5000)));
 		Reporter.log("Entered value in expected consumption", true);
 		click(contractEndDate);
 		Reporter.log("Clicked on contract end date field", true);
 		Thread.sleep(1000);
 		selectFutureDateCalender(14, random.nextInt(12), 2020);
 		Reporter.log("Entered date in the date picker", true);
-		selectByVisibleText(this.currentSupplier, "Gazprom");
+		selectByVisibleText(currentSupplier, "Gazprom");
 		Reporter.log("Selected current supplier from supplier dropdown", true);
-		setValue(this.currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		Reporter.log("Entered data in 'Current Annual Spent'", true);
 		Thread.sleep(4000);
 		//click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		return mpanNumber;
 	}
 	
 	

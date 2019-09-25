@@ -1,3 +1,4 @@
+
 package com.oem.tests;
 
 import org.testng.annotations.DataProvider;
@@ -20,48 +21,8 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateAddHHMeterPopup();
 	}
-	@Test
-	public void PM_PP_TC_065() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateAddnHHMeterPopup();
-	}
-	@Test
-	public void PM_PP_TC_066() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateAllMandatoryFieldsAddNHHPopup();
-	}
-	@Test
-	public void PM_PP_TC_067() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateMandatoryFieldsExcludingTopMeterNumbFieldsAddNHHPopup();
-	}
-	@Test
-	public void PM_PP_TC_068() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateMandatoryFieldsExcludingCoreMeterNumbFieldsAddNHHPopup();
-	}
 	
 	
-	@Test
-	public void PM_PP_TC_0689() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.addValidNHHMeterGeneric();
-	}
 	@Test(dataProvider = "getNHHdata")
 	public void addnHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType, String expectedConsumption, 
@@ -75,13 +36,20 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	}
 	@DataProvider
 	public Object[][] getNHHdata() {
-		Object[][] data = {{"03", "", "", "", "", "", "", "Fixed", "", "Ecotricity", ""}, 			/*PM_PP_TC_066*/
-				{"04", "234", "456", "", "", "", "", "Fixed", "", "Haven Power", ""},				/*PM_PP_TC_067*/
-				{"05", "", "", "10", "1270", "8070", "869", "Fixed", "", "D-ENERGi", ""},			/*PM_PP_TC_068*/
-				{"02", "456", "564", "10", "1270", "8070", "869", "Fixed", "", "Ecotricity", ""},	/*PM_PP_TC_069*/
-				{"02", "456", "564", "10", "1270", "8070", "869", "Fixed", "3500", "Haven Power", ""},/*PM_PP_TC_070*/
-				{"02", "456", "564", "10", "1270", "8070", "869", "Fixed", "3500", "Haven Power", ""}};			
+		Object[][] data = {{"03", "", "", "", "", "", "", "Fixed", "", "Ecotricity", ""}, 				/*PM_PP_TC_066*/
+				{"04", "234", "456", "", "", "", "", "Fixed", "", "Haven Power", ""},					/*PM_PP_TC_067*/
+				{"05", "", "", "10", "1270", "8070", "869", "Fixed", "", "D-ENERGi", ""},				/*PM_PP_TC_068*/
+				{"02", "456", "564", "10", "1270", "8070", "869", "Fixed", "", "Ecotricity", ""},		/*PM_PP_TC_069*/
+				{"02", "456", "564", "10", "1270", "8070", "869", "Fixed", "3500", "Haven Power", ""}};	/*PM_PP_TC_070*/					
 		return data;
+	}
+	@Test
+	public void PM_PP_TC_071() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateExpectedConsumptionMandatoryFieldAddNHHPopup();
 	}
 	@Test(dataProvider = "getGasMeterData")
 	public void addGasMeterUsingDataProviderTest(String gasMeterNumber, String procurementType, String expectedConsumption, 
