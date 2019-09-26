@@ -57,6 +57,16 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateExpectedConsumptionMandatoryFieldAddNHHPopup();
 	}
+	@Test
+	public void PM_PP_TC_072() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
+	}
+	
+	
 	@Test(dataProvider = "getGasMeterData")
 	public void addGasMeterUsingDataProviderTest(String gasMeterNumber, String procurementType, String expectedConsumption, 
 			String currentSupplier, int dayOfMonthOfContractEndDate, int monthNumberOfContractEndDate, int yearOfContractEndDate, 

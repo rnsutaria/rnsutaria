@@ -34,11 +34,11 @@ public class SanityTests extends BaseTest {
 	}*/
 
 	@Test
-	public void PM_PP_TC_071() throws Throwable {
+	public void PM_PP_TC_072() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateExpectedConsumptionMandatoryFieldAddNHHPopup();
+		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
 	}
 }

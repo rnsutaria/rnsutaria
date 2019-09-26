@@ -113,12 +113,66 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		click(meterNumb);
 	}
 	/**
-	 * Returns meter number present in meter details section 
+	 * Returns meter number present in meter details section for Gas utility
 	 * @param meterNumber
 	 */
 	public String meterNumberInMeterDetails(String meterNumber) {
 		By meterNum = By.xpath("//div[contains(text(), '" + meterNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr/td[2]");
 		return getText(meterNum);
+	}
+	/**
+	 * Returns the number present in second field of meter number for HH and NHH utility in meter details. 
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberSecondFieldInMeterDetails(String mpanNumber) {
+		By meterNumberSecondField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[2]");
+		return getText(meterNumberSecondField);
+	}
+	/**
+	 * Returns the number present in third field of meter number for HH and NHH utility in meter details.
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberThirdFieldInMeterDetails(String mpanNumber) {
+		By meterNumberThirdField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[3]");
+		return getText(meterNumberThirdField);
+	}
+	/**
+	 * Returns the number present in fourth field of meter number for HH and NHH utility in meter details.
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberFourthFieldInMeterDetails(String mpanNumber) {
+		By meterNumberFourthField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[2]/td[1]");
+		return getText(meterNumberFourthField);
+	}
+	/**
+	 * Returns the number present in fifth field of meter number for HH and NHH utility in meter details.
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberFifthFieldInMeterDetails(String mpanNumber) {
+		By meterNumberFifthField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[2]/td[2]");
+		return getText(meterNumberFifthField);
+	}
+	/**
+	 * Returns the number present in sixth field of meter number for HH and NHH utility in meter details.
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberSixthFieldInMeterDetails(String mpanNumber) {
+		By meterNumberSixthField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[2]/td[3]");
+		return getText(meterNumberSixthField);
+	}
+	/**
+	 * Returns the number present in seventh field of meter number for HH and NHH utility in meter details.
+	 * @param mpanNumber
+	 * @return
+	 */
+	public String meterNumberSeventhFieldInMeterDetails(String mpanNumber) {
+		By meterNumberSeventhField = By.xpath("//div[contains(text(), '" + mpanNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[1]/div/table/tbody/tr[2]/td[4]");
+		return getText(meterNumberSeventhField);
 	}
 	/**
 	 * Returns the locator of AMR Data Uploader button of a meter. 
@@ -776,6 +830,15 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		String mpanNumber = addValidNHHMeterGeneric();
 		Reporter.log("Added a valid NHH meter and stored MPAN number in a variable.", true);
+		click(totalnHHMetersCountInFilter);
+		Reporter.log("Clicked on filer for NHH meters", true);
+		Thread.sleep(2000);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
 		viewMeterDetails(mpanNumber);
 		Reporter.log("Clicked on the MPAN number to view the meter details.", true);
 		boolean AMRDataUploaderDisplayStatus = isElementPresent(AMRdataUploaderBtn(mpanNumber));
@@ -784,7 +847,24 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addContractHistoryBtn(mpanNumber));
 		Reporter.log("Checked if 'Add Contract History' button is displaying.", true);
 		softAssertion.assertTrue(addContractHistoryBtnDisplayStatus, "'Add Contract History' button is not displaying");
-		
+		/*boolean meterNumberSecondFieldDisplayStatus = meterNumberSecondFieldInMeterDetails(mpanNumber).contains(readExcelData("Sheet3", 6, 2));
+		Reporter.log("Checked the data present in meter number second field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberSecondFieldDisplayStatus, "Meter number second field is displaying incorrect data in meter details section.");
+		boolean meterNumberThirdFieldDisplayStatus = meterNumberThirdFieldInMeterDetails(mpanNumber).contains(readExcelData("Sheet3", 6, 3));
+		Reporter.log("Checked the data present in meter number third field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberThirdFieldDisplayStatus, "Meter number third field is displaying incorrect data in meter details section.");*/
+		boolean meterNumberFourthFieldDisplayStatus = meterNumberFourthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(0, 2));
+		Reporter.log("Checked the data present in meter number fourth field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberFourthFieldDisplayStatus, "Meter number fourth field is displaying incorrect data in meter details section.");
+		boolean meterNumberFifthFieldDisplayStatus = meterNumberFifthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(2, 6));
+		Reporter.log("Checked the data present in meter number fifth field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberFifthFieldDisplayStatus, "Meter number fifth field is displaying incorrect data in meter details section.");
+		boolean meterNumberSixthFieldDisplayStatus = meterNumberSixthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(6, 10));
+		Reporter.log("Checked the data present in meter number sixth field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberSixthFieldDisplayStatus, "Meter number sixth field is displaying incorrect data in meter details section.");
+		boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(10, 13));
+		Reporter.log("Checked the data present in meter number seventh field in meter details section and verified if it is correct", true);
+		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
 		softAssertion.assertAll();
 	}
 	
@@ -799,17 +879,15 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		click(addnHHMeter);
 		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
 		selectByVisibleText(meterNumDropdownField, "05");		
-		setValue(meterNumSecondField, "357");
-		setValue(meterNumThirdField, "539");
+		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
 		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
-		setValue(meterNumFifthField, mpanNumber.substring(2,  6));
+		setValue(meterNumFifthField, mpanNumber.substring(2, 6));
 		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		Reporter.log("Entered data in 7 fields for meter number", true);
 		selectByVisibleText(procurementType, "Fixed");
 		Reporter.log("Entered procurement type", true);
-		
-
 		setValue(expectedConsumption, String.valueOf(random.nextInt(5000)));
 		Reporter.log("Entered value in expected consumption", true);
 		click(contractEndDate);
@@ -821,9 +899,18 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Selected current supplier from supplier dropdown", true);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		Reporter.log("Entered data in 'Current Annual Spent'", true);
-		Thread.sleep(4000);
-		//click(saveMeterBtn);
+		//Thread.sleep(4000);
+		click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		Thread.sleep(2000);
+		click(okBtn);
+		Reporter.log("Clicked on Ok button in meter saved successfully popup.", true);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
 		return mpanNumber;
 	}
 	
