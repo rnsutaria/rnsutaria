@@ -867,6 +867,63 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
 		softAssertion.assertAll();
 	}
+	public void addExpiredNHHmeter() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		Random random = new Random();
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
+		Thread.sleep(2000);
+		click(addMeter);
+		Reporter.log("Clicked on add meter dropdown.", true);
+		click(addnHHMeter);
+		Reporter.log("Clicked on nHH Meter in add meter dropdown", true);
+		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
+		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
+		setValue(meterNumFifthField, mpanNumber.substring(2, 6));
+		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
+		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
+		Reporter.log("Entered data in 7 fields for meter number", true);
+		setValue(expectedConsumption, String.valueOf(random.nextInt(5000)));
+		Reporter.log("Entered value in expected consumption", true);
+		click(contractEndDate);
+		Reporter.log("Clicked on contract end date field", true);
+		Thread.sleep(1000);
+		selectPrevDateCalender(26, random.nextInt(12), 2018);
+		Reporter.log("Entered date in the date picker", true);		
+		click(saveMeterBtn);
+		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		Thread.sleep(2000);
+		click(okBtn);
+		Reporter.log("Clicked on Ok button in meter saved successfully popup.", true);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
+		boolean contractRenewalDateDisplayStatus = contractRenewalDate(mpanNumber).contains("OUT OF CONTRACT");
+		Reporter.log("Checked if 'Contract Renewal Date is displaying as 'Out of Contract'", true);
+		Assert.assertTrue(contractRenewalDateDisplayStatus, "Contract Renewal Date is not displaying as 'Out of Contract'");
+		softAssertion.assertAll();
+	}
+	
+	public void addNHHMeterUsingValidTestData() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		int nhhMetersCount = Integer.parseInt(getText(totalnHHMetersCountInFilter));
+		Reporter.log("Stored total number of NHH meters as displayed in filter before adding a NHH meter", true);
+		String mpanNumber = addValidNHHMeterGeneric();
+		Thread.sleep(2000);
+		int newNHHMetersCount = Integer.parseInt(getText(totalnHHMetersCountInFilter));
+		Reporter.log("Stored total number of NHH meters as displayed in filter after adding a NHH meter", true);
+		softAssertion.assertEquals(newNHHMetersCount, nhhMetersCount + 1, "NHH meter count in filter is not getting increased");
+		boolean editMeterBtnDisplayStatus = isElementPresent(editMeterBtn(mpanNumber));
+		Reporter.log("Checked if edit button is displaying for the meter", true);
+		softAssertion.assertTrue(editMeterBtnDisplayStatus, "Edit button for the meter is not displaying");
+		boolean deleteMeterBtnDisplayStatus = isElementPresent(deleteMeterBtn(mpanNumber));
+		Reporter.log("Checked if delete button is displaying for the meter", true);
+		softAssertion.assertTrue(deleteMeterBtnDisplayStatus, "Delete button is not displaying for the meter");
+		softAssertion.assertAll();
+	}
 	
 	public String addValidNHHMeterGeneric() throws Throwable {
 		

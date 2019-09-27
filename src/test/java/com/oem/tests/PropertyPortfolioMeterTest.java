@@ -65,6 +65,32 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
 	}
+	@Test
+	public void PM_PP_TC_074() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.addExpiredNHHmeter();
+	}
+	@Test
+	public void PM_PP_TC_075() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
+	}
+	@Test
+	public void PM_PP_TC_076() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
+	}
+	
+	
 	
 	
 	@Test(dataProvider = "getGasMeterData")
@@ -80,7 +106,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	}
 	@DataProvider
 	public Object[][] getGasMeterData() {
-		Object[][] data = {{"", "Fund", "", "British Gas Business", 20, 4, 2021, ""}, /*PM_PP_TC_081*/
+		Object[][] data = {{"", "Fixed", "", "British Gas Business", 20, 4, 2021, ""}, /*PM_PP_TC_081*/
 				{"2642342754", "Fixed", "", "D-ENERGi", 20, 5, 2020, ""}, /*PM_PP_TC_082*/
 				{"6786342454", "Fixed Pass Through", "2200", "Corona Energy", 10, 3, 2020, ""}, /*PM_PP_TC_083*/
 				{"2842342254", "Combined Flexible", "", "Corona Energy", 10, 3, 2020, ""},/*PM_PP_TC_084*/
