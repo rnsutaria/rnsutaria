@@ -61,6 +61,9 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By currentDataCollector = By.id("dataCollector");
 	By dataCollectorEndDate = By.id("dataCollectorEndDateForMeterModel");
 	
+	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
+	By okBtn = By.xpath("//button[text() = 'OK']");
+	
 	public void addHHMeterUsingDifferentTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
 			String expectedConsumption, String currentSupplier, String capacity, String currentAnnualSpend, 
@@ -420,5 +423,13 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on Add Meter dropdown");
 		click(addGasMeter);
 		Reporter.log("Clicked on Gas meter");
+	}
+	public void deleteAllSites() throws Throwable {
+		List<WebElement> allElements = driver.findElements(deleteSites);
+		for (WebElement element: allElements) {
+			click((By) element);
+			click(okBtn);
+			Thread.sleep(2000);
+		}
 	}
 }

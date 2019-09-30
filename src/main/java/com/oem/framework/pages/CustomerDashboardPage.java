@@ -12,7 +12,11 @@ public class CustomerDashboardPage extends BasePage {
     By propertyPortfolio = By.linkText("Property Portfolio");
     By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
     By tipCloseBtn = By.xpath("//p[text() = 'Tip 1 of 1']/following-sibling::a");
-
+    
+    By quotesAndTenders = By.xpath("//div[@id = 'accordian-menu']//li[4]/h3");
+    By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");
+    
+    
     public CustomerDashboardPage goToCompanyProfile(){
         click(portfolioMgr);
         click(companyProfile);
@@ -51,6 +55,14 @@ public class CustomerDashboardPage extends BasePage {
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
         return propertyPortfolioMeterPage; 
+    }
+    
+    public CustomerDashboardPage goToRequestQuote(){
+        click(quotesAndTenders);
+        click(requestAQuoteLink);
+        RequestQuotePage requestQuotePage=new RequestQuotePage();
+        requestQuotePage.isLoaded();
+        return requestQuotePage;
     }
 
 
