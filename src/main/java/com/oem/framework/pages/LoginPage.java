@@ -60,6 +60,25 @@ public class LoginPage extends BasePage {
         //Failed login
         return this;
     }
+    public BasePage loginAsAdmin() throws Throwable  {
+    	String URL = getPropertyFileData("url");
+    	String EMAIL = getPropertyFileData("adminEmail");
+    	String PASSWORD = getPropertyFileData("adminPassword");
+    	driver.get(URL);
+        setValue(username, EMAIL);
+        setValue(pwd, PASSWORD);
+        click(signInBtn);
+
+
+        if(isAdminDashboardPage())
+            return new AdminDashboardPage();
+
+        if(isCustomerDashboardPage())
+            return new CustomerDashboardPage();
+
+        //Failed login
+        return this;
+    }
 
 
     @Override

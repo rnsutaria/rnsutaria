@@ -16,6 +16,15 @@ public class AdminDashboardPage extends BasePage {
         click(impersonateBtn);
         return new CustomerDashboardPage();
     }
+    
+    public SupplierDashboardPage impersonateSupplier() throws Throwable{
+    	String EMAIL = getPropertyFileData("supplierEmail");
+        setValue(impersonateUsername, EMAIL);
+        click(impersonateBtn);
+        return new SupplierDashboardPage();
+    }
+    
+    
 
 
 

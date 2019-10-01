@@ -23,6 +23,25 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By contractDurationGasUtility = By.id("GasQuote_ContractDurationInMonths");
 	By contractDurationWaterUtility = By.id("WaterQuote_ContractDurationInMonths");
 	
+	//day 01/10/2019 added 
+	
+	By SelectAllChoosemeter = By.xpath("//div[@id='request-electricity-hh-quote']//a[@id='selectall']");
+	By ContractDuration = By.xpath("//select[@id='ElectricityQuoteHh_ContractDurationInMonths']");
+	By AddNewContractDuration = By.xpath("//div[@id='request-electricity-hh-quote']//p[@class='add-duration'][contains(text(),'Add new contract duration')]");
+	By ContractDuration2 = By.xpath("//select[@id='ElectricityQuoteHh_Duration2']");
+	By SelectAllChooseSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//div[@id='selectall']");
+	By HHElectricity = By.xpath("//a[@id='request-electricity-hh-quote-a']");
+	By Date =By.xpath("//input[@id='ElectricityQuoteHh_TenderDate']");
+	By TopSubmit = By.xpath("//input[@class='btn btn-primary pull-right']");
+	By OkAlert = By.xpath("//button[text() = 'OK']");
+	By OkAlertTextwhen2sameContractDurationSected =By.xpath("//div[@class='vex-dialog-message']");
+	By OkAlert2=By.xpath("//button[text() = 'OK']");
+	By MeterFirstElement = By.xpath("//label[contains(text(),'1200010055124')]");
+	By message =By.xpath("//div[@class='alert alert-error']");
+	/*By AlertMessageText =By.xpath("//li[contains(text(),'Please select at least one meter for a quote reque')]");
+	By contractErrormessage = By.xpath("//li[contains(text(),'Please select contract duration')]");
+	By supplierErrorMessage = By.xpath("//li[contains(text(),'Please select at least one supplier for a quote re')]");*/
+	
 	
 	By submit = By.xpath("btn btn-primary pull-right");
 	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
@@ -162,4 +181,169 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		
 		softAssertion.assertAll();
 	}
+	public void validatealertErrormessage_IfNotSelectedAndempty(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+	}
+	public void validatealertErrormessagewhenOnlyOneMeterisSelected() throws InterruptedException{
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		//click(MeterFirstElement);i am not able to find this element
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		Thread.sleep(2000);
+		click(OkAlert);
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+	}
+	public void validatealertErrormessagewhenMoreThanOneMeterisSelected() throws InterruptedException{
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		Thread.sleep(2000);
+		click(OkAlert);
+		
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+		
+	}
+	
+	public void validatealertErrormessagewhenOneContractDurationisSelected(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		selectByIndex(ContractDuration,01);
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		
+		
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+		
+	}
+	
+	public void validatealertErrormessagewhenMoreThanOneContractDurationisSelected(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		Reporter.log("Clicked on HH", true);
+		click(SelectAllChoosemeter);
+		selectByIndex(ContractDuration,01);
+		click(AddNewContractDuration);
+		selectByIndex(ContractDuration2,02);
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		
+		
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+		}
+	public void validateAlertMessageWhen2ContractDurationsAreSame(){
+		SoftAssert softAssertion = new SoftAssert();
+		//click(SelectAllChoosemeter);
+		selectByIndex(ContractDuration,02);
+		click(AddNewContractDuration);
+		selectByIndex(ContractDuration2,02);
+		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
+		Reporter.log("Checked if error message for selecting 2 same Contract Durations", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations, "Error message is not displaying for selecting 2 same Contract Durations");
+		softAssertion.assertAll();
+		click(OkAlert2);
+	}
+	public void validatealertErrormessageAfterSelectingOneSuplier(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		clearValue(Date);
+		click(TopSubmit);
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+	}
+	
+	public void validatealertErrormessageAfterSelectingAllSuplier(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		clearValue(Date);
+		click(TopSubmit);
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+	}
+	
+	
 }
