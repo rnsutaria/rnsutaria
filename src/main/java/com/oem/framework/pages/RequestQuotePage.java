@@ -129,7 +129,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean contractEndDate30monthsPresenceStatusGasUtility = isElementExistInDropDown(contractDurationGasUtility, "30 months");
 		softAssertion.assertTrue(contractEndDate30monthsPresenceStatusGasUtility, "30 months is not displaying in contract end date dropdown for Gas Utility");
 		Reporter.log("Checked if 30 months is displaying in contract end date dropdown for Gas Utility", true);
-		boolean contractEndDate36monthsPresenceStatusGasUtility = isElementExistInDropDown(contractDurationGasUtility, "36 month");
+		boolean contractEndDate36monthsPresenceStatusGasUtility = isElementExistInDropDown(contractDurationGasUtility, "36 months");
 		softAssertion.assertTrue(contractEndDate36monthsPresenceStatusGasUtility, "36 months is not displaying in contract end date dropdown for Gas Utility");
 		Reporter.log("Checked if 36 months is displaying in contract end date dropdown for Gas Utility", true);
 		boolean contractEndDate60monthsPresenceStatusGasUtility = isElementExistInDropDown(contractDurationGasUtility, "60 months");

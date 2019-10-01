@@ -38,15 +38,9 @@ public class RequestQuoteTest extends BaseTest {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage)loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
-		requestQuotePage.validatePresenceAllUtilities();
-	}
-	@Test
-	public void QT_RAQ_TC_009() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage)loginPage.login();
-		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validateContractDurationValuesForAllUtilities();
 	}
+	
 	
 	
 }
