@@ -33,12 +33,25 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 
-	@Test
-	public void PM_PP_TC_074() throws Throwable {
+	@Test(dataProvider = "getHHdata")
+	public void addHHMeterUsingDataProviderTest(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String expectedConsumption, 
+			String capacity) throws Throwable {
 		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.addExpiredNHHmeter();
+		propertyPortfolioMeterTest.addHHMeterUsingDifferentTestData(meterNoSecondField, meterNoThirdField, 
+				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, expectedConsumption, capacity); 
+	}
+	@DataProvider
+	public Object[][] getHHdata() {
+		Object[][] data = {{"", "", "", "", "", "", "", ""}, 									/*PM_PP_TC_016*/
+				{"234", "456", "", "", "", "", "", ""},											/*PM_PP_TC_017*/
+				{"", "", "10", "1270", "8070", "869", "", ""},									/*PM_PP_TC_018*/
+				{"456", "564", "10", "1270", "8070", "869", "", ""},							/*PM_PP_TC_019*/
+				{"456", "564", "10", "1270", "8070", "869", "3500", ""},						/*PM_PP_TC_020*/
+				{"456", "564", "10", "1270", "8070", "869", "", "5200"},						/*PM_PP_TC_022*/
+				{"456", "564", "10", "1270", "8070", "869", "4000", "7000"}};					/*PM_PP_TC_024*/					
+		return data;
 	}
 }

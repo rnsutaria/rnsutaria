@@ -82,14 +82,14 @@ public class PortfolioCalendarTest extends BaseTest{
 		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
 		portfolioCalendarPage.validateEditEventPopup("Edit portfolio calendar entry");
 	}
-	@Test
+	/*@Test
 	public void PM_PC_TC_013() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
 		portfolioCalendarPage.validateCloseIconEditEventPopup();
-	}
+	}*/
 	@Test
 	public void PM_PC_TC_014() throws Throwable {
 		LoginPage loginPage = new LoginPage();

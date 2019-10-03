@@ -21,6 +21,57 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateAddHHMeterPopup();
 	}
+	
+	@Test(dataProvider = "getHHdata")
+	public void addHHMeterUsingDataProviderTest(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String expectedConsumption, 
+			String capacity) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.addHHMeterUsingDifferentTestData(meterNoSecondField, meterNoThirdField, 
+				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, expectedConsumption, capacity); 
+	}
+	@DataProvider
+	public Object[][] getHHdata() {
+		Object[][] data = {{"", "", "", "", "", "", "", ""}, 									/*PM_PP_TC_016*/
+				{"234", "456", "", "", "", "", "", ""},											/*PM_PP_TC_017*/
+				{"", "", "10", "1270", "8070", "869", "", ""},									/*PM_PP_TC_018*/
+				{"456", "564", "10", "1270", "8070", "869", "", ""},							/*PM_PP_TC_019*/
+				{"456", "564", "10", "1270", "8070", "869", "3500", ""},						/*PM_PP_TC_020*/
+				{"456", "564", "10", "1270", "8070", "869", "", "5200"},						/*PM_PP_TC_022*/
+				{"456", "564", "10", "1270", "8070", "869", "4000", "7000"}};					/*PM_PP_TC_024*/					
+		return data;
+	}
+	@Test(dataProvider = "getHHdata2")
+	public void addHHMeterUsingDataProviderTest2(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, int date, int month, int year,
+			String expectedConsumption, String capacity) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.addHHMeterUsingDifferentTestData2(meterNoSecondField, meterNoThirdField, 
+				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, date, month, year, 
+				expectedConsumption, capacity); 
+	}
+	@DataProvider
+	public Object[][] getHHdata2() {
+		Object[][] data = {{"456", "564", "10", "1270", "8070", "869", 12, 4, 2020, "", ""},				/*PM_PP_TC_021*/
+				{"456", "564", "10", "1270", "8070", "869", 17, 7, 2020, "3500", ""},						/*PM_PP_TC_023*/
+				{"456", "564", "10", "1270", "8070", "869", 24, 9, 2020, "4000", "7000"}};					/*PM_PP_TC_025*/					
+		return data;
+	}
+	@Test
+	public void PM_PP_TC_026() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.addHHMeterUsingValidTestData();
+	}
+	
+	
+	
 	@Test
 	public void PM_PP_TC_065() throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -30,7 +81,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateAddnHHMeterPopup();
 	}
 	@Test(dataProvider = "getNHHdata")
-	public void addnHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+	public void addnHHMeterUsingDataProviderTest(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType, String expectedConsumption, 
 			String currentSupplier, String currentAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -81,13 +132,29 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
 	}
-	@Test
+	/*@Test
 	public void PM_PP_TC_076() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
+	}*/
+	@Test
+	public void PM_PP_TC_078() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateNHHdeleteMeterPopup();
+	}
+	@Test
+	public void PM_PP_TC_079() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateDeleteNHHmeter();
 	}
 	
 	
@@ -160,14 +227,14 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterPage.validateDeleteMeterPopup();
+		propertyPortfolioMeterPage.validateGasDeleteMeterPopup();
 	}
 	@Test 
 	public void PM_PP_TC_092() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterPage.validateDeleteMeter();
+		propertyPortfolioMeterPage.validateDeleteGasMeter();
 	}
 	@Test 
 	public void PM_PP_TC_106() throws Throwable {

@@ -26,18 +26,36 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	//day 01/10/2019 added 
 	
 	By SelectAllChoosemeter = By.xpath("//div[@id='request-electricity-hh-quote']//a[@id='selectall']");
+	By MeterFirstElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_0_']");//this will change continuously
+	By MeterSecondElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_1_']");
+	By MeterThridElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_2_']");
+	By MeterFourElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_3_']");
+	
 	By ContractDuration = By.xpath("//select[@id='ElectricityQuoteHh_ContractDurationInMonths']");
 	By AddNewContractDuration = By.xpath("//div[@id='request-electricity-hh-quote']//p[@class='add-duration'][contains(text(),'Add new contract duration')]");
 	By ContractDuration2 = By.xpath("//select[@id='ElectricityQuoteHh_Duration2']");
+	By ContractDuration3=By.xpath("//select[@id='ElectricityQuoteHh_Duration3']");
+	By ContractDuration4=By.xpath("//select[@id='ElectricityQuoteHh_Duration4']");
+	
 	By SelectAllChooseSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//div[@id='selectall']");
+	By FirstSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[1]//label[1]");
+	By ThirdrdSupplier=By.xpath("//div[@id='request-electricity-hh-quote']//li[3]//label[1]");
+	By FourthSupplier=By.xpath("//div[@id='request-electricity-hh-quote']//li[4]//label[1]");
+	By FifthSupplier=By.xpath("//div[@id='request-electricity-hh-quote']//li[5]//label[1]");
+	By SixthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[6]//label[1]");
+	
 	By HHElectricity = By.xpath("//a[@id='request-electricity-hh-quote-a']");
+	
 	By Date =By.xpath("//input[@id='ElectricityQuoteHh_TenderDate']");
+	By RenewableEnergy=By.xpath("//div[@id='request-electricity-hh-quote']//label[contains(text(),'Renewable energy')]");
+	
 	By TopSubmit = By.xpath("//input[@class='btn btn-primary pull-right']");
-	By OkAlert = By.xpath("//button[text() = 'OK']");
+	By OkAlert = By.xpath("//button[@class='vex-dialog-button-primary vex-dialog-button vex-first vex-last']");
 	By OkAlertTextwhen2sameContractDurationSected =By.xpath("//div[@class='vex-dialog-message']");
-	By OkAlert2=By.xpath("//button[text() = 'OK']");
-	By MeterFirstElement = By.xpath("//label[contains(text(),'1200010055124')]");
+	By OkAlert2=By.xpath("//button[@class='vex-dialog-button-primary vex-dialog-button vex-first vex-last']");
+	
 	By message =By.xpath("//div[@class='alert alert-error']");
+	By tenderRequestSummary=By.xpath("//h1[contains(text(),'Tender Request Summary')]");
 	/*By AlertMessageText =By.xpath("//li[contains(text(),'Please select at least one meter for a quote reque')]");
 	By contractErrormessage = By.xpath("//li[contains(text(),'Please select contract duration')]");
 	By supplierErrorMessage = By.xpath("//li[contains(text(),'Please select at least one supplier for a quote re')]");*/
@@ -47,6 +65,111 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
 	By okBtn = By.xpath("//button[text() = 'OK']");
 	
+	public void SelectingZeroMeters(){
+		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on Choose Meter All.", true);
+	}
+	public void SelectingSingleMeter(){
+		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on Choose Meter All.", true);
+		
+		click(MeterFirstElement);
+		Reporter.log("Clicked on First Meter.", true);
+	}
+	public void SelectingMultipleMeter(){
+		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on Choose Meter All.", true);
+		
+		click(MeterFirstElement);
+		Reporter.log("Clicked on First Meter.", true);
+		click(MeterSecondElement);
+		Reporter.log("Clicked on Second Meter.", true);
+		click(MeterThridElement);
+		Reporter.log("Clicked on Third Meter.", true);
+		
+	}
+	public void SelectingSingleContractDuration(){
+		selectByIndex(ContractDuration,02);
+		Reporter.log("Selected First Contract Duration.", true);
+	}
+	public void SelectingMultipleContractDuration(){
+		selectByIndex(ContractDuration,02);
+		Reporter.log("Selected First Contract Duration.", true);
+		
+		click(AddNewContractDuration);
+		Reporter.log("Clicked Add Contract Duration. ", true);
+		selectByIndex(ContractDuration2,03);
+		Reporter.log("Selected second Contract Duration.", true);
+		
+		click(AddNewContractDuration);
+		Reporter.log("Clicked Add Contract Duration. ", true);
+		selectByIndex(ContractDuration3,04);
+		Reporter.log("Selected Third Contract Duration.", true);
+	}
+	public void SelectingZeroSuppliers(){
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked Choose Supplier All.", true);
+	}
+	public void SelectingSingleSupplier(){
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked Choose Supplier All.", true);
+		
+		click(FirstSupplier);
+		Reporter.log("Clicked First Supplier.", true);
+	}
+	
+	public void SelectingMultipleSupplier(){
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked Choose Supplier All.", true);
+		
+		click(FirstSupplier);
+		Reporter.log("Clicked 1st Supplier.", true);
+		click(ThirdrdSupplier);
+		Reporter.log("Clicked 3rd Supplier.", true);
+		click(FourthSupplier);
+		Reporter.log("Clicked 4th Supplier.", true);
+		click(FifthSupplier);
+		Reporter.log("Clicked 5th Supplier.", true);
+		
+	}
+	public void ClickTopSubmitButton(){
+		click(TopSubmit);
+		Reporter.log("Clicked Submit Button.", true);
+	}
+	public void SelectElectricity_HHUtility(){
+		click(HHElectricity);
+		Reporter.log("Clicked HH ElectricityUtility. ", true);
+		
+		
+	}
+	public void SelectElectricity_nHHUtility(){
+		click(filterByNHHutility);
+		Reporter.log("Clicked nHH ElectricityUtility. ", true);
+		
+		
+	}
+	public void SelectGasUtility(){
+		click(filterByGasUtility);
+		Reporter.log("Clicked GasUtility. ", true);
+		
+		
+	}
+	public void SelectWaterUtility(){
+		click(filterByWaterUtility);
+		Reporter.log("Clicked WaterUtility. ", true);
+		
+		
+	}
+	public void EnterDate(String value){
+		clearValue(Date);
+		Reporter.log("Cleared Date. ", true);
+		setValue(Date,value);
+		Reporter.log("Enterd Date. ", true);
+	}
+	public void ClickRenewableEnergy(){
+		click(RenewableEnergy);
+		Reporter.log("Clicked Renewable Energy. ", true);
+	}
 	@Override
     protected void isLoaded() throws Error {
         System.out.println("Executing isLoaded in Request a Quote Page");
@@ -203,7 +326,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		
 		softAssertion.assertAll();
 	}
-	public void validatealertErrormessagewhenOnlyOneMeterisSelected() throws InterruptedException{
+	public void validatealertErrormessagewhenOnlyOneMeterisSelected(){
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
@@ -211,7 +334,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clearValue(Date);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
-		Thread.sleep(2000);
 		click(OkAlert);
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
@@ -224,13 +346,12 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		
 		softAssertion.assertAll();
 	}
-	public void validatealertErrormessagewhenMoreThanOneMeterisSelected() throws InterruptedException{
+	public void validatealertErrormessagewhenMoreThanOneMeterisSelected(){
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		clearValue(Date);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
-		Thread.sleep(2000);
 		click(OkAlert);
 		
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
@@ -272,7 +393,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessagewhenMoreThanOneContractDurationisSelected(){
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
-		Reporter.log("Clicked on HH", true);
 		click(SelectAllChoosemeter);
 		selectByIndex(ContractDuration,01);
 		click(AddNewContractDuration);
@@ -345,5 +465,303 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 	
+	public void validatealertErrormessageAfterSelecting1meter1contractDuration(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		click(MeterFirstElement);
+		selectByIndex(ContractDuration,02);
+		clearValue(Date);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		//click(OkAlert2);
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+	}
+	public void validatealertErrormessageAfterSelecting1meterMultiplecontractDuration(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		click(SelectAllChoosemeter);
+		click(MeterFirstElement);
+		selectByIndex(ContractDuration,02);
+		click(AddNewContractDuration);
+		selectByIndex(ContractDuration2,03);
+		click(AddNewContractDuration);
+		selectByIndex(ContractDuration3,04);
+		click(AddNewContractDuration);
+		selectByIndex(ContractDuration4,05);
+		click(SelectAllChooseSupplier);
+		click(TopSubmit);
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+	}
+	public void validatealertErrormessageAfterSelectingMultiplemeterMultiplecontractDuration(){
+		SoftAssert softAssertion = new SoftAssert();
+		click(HHElectricity);
+		Reporter.log("Clicked on  HHE Electricity.", true);
+		
+		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on ChooseMeter All.", true);
+		
+		click(MeterFirstElement);
+		Reporter.log("Clicked First Meter.", true);
+		click(MeterSecondElement);
+		Reporter.log("Clicked second Meter.", true);
+		click(MeterThridElement);
+		Reporter.log("Clicked Third Meter.", true);
+		click(MeterFourElement);
+		Reporter.log("Clicked fourth Meter.", true);
+		
+		selectByIndex(ContractDuration,02);
+		Reporter.log("Selected 1st contract duration.", true);
+		click(AddNewContractDuration);
+		Reporter.log("Clicked on Add New Contract Duration.", true);
+		selectByIndex(ContractDuration2,03);
+		Reporter.log("Selected 2nd contract duration.", true);
+		click(AddNewContractDuration);
+		Reporter.log("Clicked on Add New Contract Duration.", true);
+		selectByIndex(ContractDuration3,04);
+		Reporter.log("Selected 3rd contract duration.", true);
+		click(AddNewContractDuration);
+		Reporter.log("Clicked on Add New Contract Duration.", true);
+		selectByIndex(ContractDuration4,05);
+		Reporter.log("Selected 4th contract duration.", true);
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on Choose Supplier All.", true);
+		click(TopSubmit);
+		Reporter.log("Clicked Submit Button.", true);
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+	}
+	public void validatingErrorMessageAfterSelecting1contractDurationAndMultipleSuppliers(){
+		SoftAssert softAssertion=new SoftAssert();
+		
+		click(HHElectricity);
+		Reporter.log("Clicked on  HHE Electricity.", true);
+		
+		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on ChooseMeter All.", true);
+		
+		selectByIndex(ContractDuration,02);
+		Reporter.log("Selected 1st contract duration.", true);
+		
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on Choose Supplier All.", true);
+		click(ThirdrdSupplier);
+		Reporter.log("Clicked on 3rd Supplier.",true);
+		click(FourthSupplier);
+		Reporter.log("Clicked on 4th Supplier.", true);
+		click(FifthSupplier);
+		Reporter.log("Clicked on 5th Supplier.", true);
+		
+		click(TopSubmit);
+		Reporter.log("Clicked Submit Button.", true);
+		
+		
+		boolean errorMessageDisplyStatusForNotSelectingMeter=getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter, "Error message is not displaying for not selecting any Meter.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+	}
+	public void validatingErrorMessageAfterSelectingMultiplecontractDurationAndSingleSupplier(){
+		SoftAssert softAssertion=new SoftAssert();
+		SelectElectricity_HHUtility();
+		SelectingZeroMeters();
+		SelectingMultipleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		boolean errorMessageDisplyStatusForNotSelectingMeter=getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter, "Error message is not displaying for not selecting any Meter.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+		
+	}
+	public void validatingErrorMessageAfterSelectingsinglecontractDurationAndmultipleSupplier(){
+		SoftAssert softAssertion=new SoftAssert();
+		SelectElectricity_HHUtility();
+		SelectingZeroMeters();
+		SelectingSingleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		boolean errorMessageDisplyStatusForNotSelectingMeter=getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter, "Error message is not displaying for not selecting any Meter.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+		
+	}
+	public void validatingAvailablityToVerfyAfterSelecting1Meter1Contract1Supplier(){
+		SelectElectricity_HHUtility();
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1Contract1Supplier(){
+		SelectElectricity_HHUtility();
+		SelectingMultipleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelecting1MeterMultipleContract1Supplier(){
+		SelectElectricity_HHUtility();
+		SelectingSingleMeter();
+		SelectingMultipleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplier(){
+		SelectElectricity_HHUtility();
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContract1Supplier(){
+		SelectElectricity_HHUtility();
+		SelectingMultipleMeter();
+		SelectingMultipleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1ContractMultipleSupplier(){
+		SelectElectricity_HHUtility();
+		SelectingMultipleMeter();
+		SelectingSingleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingSingleMeterMultipleContractMultipleSupplier(){
+		SelectElectricity_HHUtility();
+		SelectingSingleMeter();
+		SelectingMultipleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContractMultipleSupplier(){
+		SelectElectricity_HHUtility();
+		SelectingMultipleMeter();
+		SelectingMultipleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		//need to write further script to verify is it present at admin portal
+	}
+	public void validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndRenewableEnergy(){
+		SelectElectricity_HHUtility();
+		ClickRenewableEnergy();
+		SelectingMultipleContractDuration();
+		ClickTopSubmitButton();
+		
+	}
+	public void validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBefore(){
+		SoftAssert softAssertion=new SoftAssert();
+		SelectElectricity_HHUtility();
+		SelectingMultipleContractDuration();
+		EnterDate("27/09/2019");
+		ClickTopSubmitButton();
+		
+		boolean errorMessageDisplyStatusForEnteringwrongDate=getText(message).contains("Tender date must be at least five days in the future");
+		Reporter.log("Checked if error message for Entering wrong Date is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate, "Error message is not displaying for Entring Wrong Date.");
+		//Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+		
+	}
+	public void validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndSettingDatetoFuture(){
+		
+		SelectElectricity_HHUtility();
+		SelectingMultipleContractDuration();
+		EnterDate("05/10/2019");
+		ClickTopSubmitButton();
+	}
+	public void options(String meter,String contractDuration,String supplier){
+		switch(meter) 
+        { 
+            case "zero": 
+            	SelectingZeroMeters();
+                break; 
+            case "single": 
+            	SelectingSingleMeter();
+                break; 
+            case "multiple": 
+            	SelectingMultipleMeter();
+                break; 
+            default: 
+                System.out.println("no match in meter"); 
+        }
+		switch(contractDuration) 
+        { 
+        case "zero": 
+        	click(ContractDuration);
+        	click(ContractDuration);
+            break; 
+            case "single": 
+            	SelectingSingleContractDuration();
+                break; 
+            case "multiple": 
+            	SelectingMultipleContractDuration();
+                break; 
+            default: 
+                System.out.println("no match in contractDuration"); 
+        } 
+		switch(supplier) 
+        { 
+            case "zero": 
+            	SelectingZeroSuppliers();
+                break; 
+            case "single": 
+            	SelectingSingleSupplier();
+                break; 
+            case "multiple": 
+            	SelectingMultipleSupplier();
+                break; 
+            default: 
+                System.out.println("no match in Suppliers"); 
+        }
+		
+	}
 	
+	public void verifyAlertMessageWhenNometerNocontractnosupplierSelectedIn_nHHUtility(){
+		SoftAssert softAssertion = new SoftAssert();
+		SelectElectricity_nHHUtility();
+		options("zero","zero","zero");
+		ClickTopSubmitButton();
+		
+		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message).contains("Please select at least one meter for a quote request.");
+		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter, "Error message is not displaying for not selecting any meter.");
+		
+		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message).contains("Please select contract duration");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration, "Error message is not displaying for not entering contract duration.");	
+		
+		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message).contains("Please select at least one supplier for a quote request.");
+		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier, "Error message is not displaying for not selecting any supplier.");
+		//Assert.assertEquals(actual, expected)
+		
+		softAssertion.assertAll();
+	}
 }
+

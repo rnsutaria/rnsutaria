@@ -11,7 +11,7 @@ public class CustomerDashboardPage extends BasePage {
     By portfolioCalendar = By.linkText("Portfolio Calendar");
     By propertyPortfolio = By.linkText("Property Portfolio");
     By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
-    By tipCloseBtn = By.xpath("//p[text() = 'Tip 1 of 1']/following-sibling::a");
+    By tipCloseBtn = By.xpath("//p[contains(text(),'Tip')]/following-sibling::a");
     
     By quotesAndTenders = By.xpath("//div[@id = 'accordian-menu']//li[4]/h3");
     By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");

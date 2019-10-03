@@ -8,7 +8,9 @@
     <test name="Automation tests" thread-count="3" parallel="methods">
 
         <packages>
-            <package name="com.oem.tests"/>			
+            <package name="com.oem.tests"/>	
+            <package name="com.oem.QuotesAndTenders"/>	
+            <package name="com.oem.suppliers"/>	
         </packages>
     </test>
 </suite>
