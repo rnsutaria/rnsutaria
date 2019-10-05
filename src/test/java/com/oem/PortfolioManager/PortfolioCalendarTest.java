@@ -1,4 +1,4 @@
-package com.oem.tests;
+package com.oem.PortfolioManager;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;

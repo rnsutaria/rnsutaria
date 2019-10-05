@@ -17,8 +17,34 @@ public class TendersAndAlertsTest extends BaseTest {
 		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
 		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
 		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
+		tendersAndAlertsPage.validateQuoteRequestStatusDropdownPresence();
+	}
+	@Test
+	public void QT_RAQ_TC_004() throws Throwable
+	{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
+		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
+		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
+		tendersAndAlertsPage.validatingPresenceOfUtilities();
+	}
+	@Test
+	public void QT_RAQ_TC_005() throws Throwable
+	{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
+		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
+		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
 		tendersAndAlertsPage.validateQuoteRequestStatusDropdown();
 	}
 	
+	/*public void QT_RAQ_TC_019() throws Throwable
+	{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
+		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
+		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
+		tendersAndAlertsPage.validateSubmitPricePage();
+	}*/
 	
 }

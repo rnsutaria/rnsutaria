@@ -1,5 +1,5 @@
 
-package com.oem.tests;
+package com.oem.PortfolioManager;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -69,6 +69,64 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.addHHMeterUsingValidTestData();
 	}
+	@Test
+	public void PM_PP_TC_027() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.addValidHHmeterGeneric();
+	}
+	@Test
+	public void PM_PP_TC_028() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingHHMeter();
+	}
+	@Test
+	public void PM_PP_TC_029() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateEditHHmeterPopup();
+	}
+	@Test
+	public void PM_PP_TC_030() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateEditHHmeter();
+	}
+	@Test
+	public void PM_PP_TC_031() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateHHdeleteMeterPopup();
+	}
+	@Test
+	public void PM_PP_TC_032() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateDeleteHHmeter();
+	}
+	
+	
+	@Test
+	public void PM_PP_TC_033() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
+	}
+
 	
 	
 	

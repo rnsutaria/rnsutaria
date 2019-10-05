@@ -1,4 +1,4 @@
-package com.oem.tests;
+package com.oem.PortfolioManager;
 
 import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.CompanyProfilePage;

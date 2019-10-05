@@ -225,11 +225,11 @@ public class RequestQuoteTest extends BaseTest {
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndSettingDatetoFuture();
 	}
-	/*@Test
+	@Test
 	public void QT_RAQ_TC_037() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhenNometerNocontractnosupplierSelectedIn_nHHUtility();
-	}*/
+	}
 }

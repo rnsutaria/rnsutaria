@@ -19,8 +19,8 @@ public class SupplierDashboardPage extends BasePage {
 	
 	@Override
     protected void isLoaded() throws Error {
-        System.out.println("Executing isLoaded in CustomerDashboard Page");
-        Assert.assertTrue(isElementPresent(tendersAndAlertsLink),"Portfolio Calendar Page didnt appear");
+        System.out.println("Executing isLoaded in Supplier Dashboard Page");
+        Assert.assertTrue(isElementPresent(tendersAndAlertsLink),"Supplier Dashboard Page didnt appear");
         
     }
 }

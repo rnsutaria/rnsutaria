@@ -1,4 +1,4 @@
-package com.oem.tests;
+package com.oem.PortfolioManager;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
