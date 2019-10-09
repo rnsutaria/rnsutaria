@@ -126,6 +126,18 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
 	}
+	/*@Test
+	public void addHHcontractHistoryUsingDataProviderTest() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopup();
+	}
+	@DataProvider
+	public Object[][] getHHcontractHistoryData() {
+		Object[][] data = {{}};
+		return data;
+	}*/
 
 	
 	

@@ -73,8 +73,24 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By deleteMeterBtnInDeletePopup = By.xpath("//form[@id='frm-delete-meter']//button[1]");
 	By meterDeleteSuccessfulPopup = By.xpath("//div[text() = 'The Meter was deleted successfully.']");
 	By revertMeterConfirmPopup = By.xpath("//div[text() = 'Are you sure you wish to revert this meter back to an active state?']");
-	
+	//Contract History
 	By addContractHistoryPopup = By.xpath("//h3[text() = 'Add new Contract History details']");
+	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
+	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
+	By dateTraded = By.id("dateTraded");
+	By contractStartDate = By.id("contractStartDate");
+	By contractEndDate_ContractHist = By.id("contractEndDate");
+	By dayRate = By.id("dayRate");
+	By nightRate = By.id("nightRate");
+	By standingCharge = By.id("standingCharge");
+	By capacityCharge = By.id("capacityCharge");
+	By contractedAnnualSpend = By.id("contractedAnnualSpend");
+	By contractedConsumption = By.id("contractedConsumption");
+	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
+	By supplierProductDDwn = By.id("supplierProductForContractHistory");
+	By uploadContractBtn = By.id("btnShowContractUploadModal");
+	
 	
 	/**
 	 * Returns the locator of the Edit meter button by passing 'Meter Number' as argument
@@ -988,11 +1004,14 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	
 	/**
 	 * Add contract history popup.
-	 * @throws Throwable
 	 */
 	public void validateAddContractHistoryPopup() throws Throwable {
-		String mpanNumber = addValidHHmeterGeneric();
+		/*String mpanNumber = addValidHHmeterGeneric();
 		scrollToElement(editMeterBtn(mpanNumber));
+		viewMeterDetails(mpanNumber);
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Reporter.log("Clicked on the 'Add Contract History' button.", true);*/
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		Reporter.log("Clicked on the 'Add Contract History' button.", true);
@@ -1000,6 +1019,18 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Checked if add contract history popup is displaying.", true);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
+	public void validateMandatoryFieldsContractHistoryPopup() {
+		SoftAssert softAssertion = new SoftAssert();
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
+		viewMeterDetails(mpanNumber);
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Reporter.log("Clicked on the 'Add Contract History' button.", true);
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		boolean ariaInvalidStatus = getAttribute(dateTraded, "aria-invalid").equals("true");
+		softAssertion.assertTrue(ariaInvalidStatus, "");
+	}
+	
 	
 	
 	

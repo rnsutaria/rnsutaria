@@ -93,28 +93,4 @@ public class PropertyPortfolioTest extends BaseTest {
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validateAddMeterDropdown(); 
 	}
-	 //Executes Add HH Meter form for different test data. Test cases: PM_PP_TC_016 to  
-	@Test(dataProvider = "getHHMeterData")
-	public void addHHMeterUsingDataProvider(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
-			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
-			String expectedConsumption, String currentSupplier, String capacity, String currentAnnualSpend, 
-			String currentMeterOperator, String currentDataCollector) throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.addHHMeterUsingDifferentTestData(meterNoDropdownFieldValue, meterNoSecondField, meterNoThirdField, 
-				meterNoFourthField,	meterNoFifthField, meterNoSixthField, meterNoSeventhField, procurementType,	expectedConsumption, 
-				currentSupplier, capacity, currentAnnualSpend, currentMeterOperator, currentDataCollector);
-	}
-	@DataProvider
-	public Object[][] getHHMeterData()
-	{
-		Object[][] data = {{"00", "234", "123", "234", "345", "234", "234", "Combined Flexible", "2000", "F&S Energy", "4500", "3200", "Bury Metering Services Limited", "Energy Assets"},
-		{"00", "", "", "", "", "", "", "Flexible", "2500", "F&S Energy", "3500", "3200", "Bury Metering Services Limited", "Energy Assets"}};
-		return data;
-	}
-	
-	
-	
 }

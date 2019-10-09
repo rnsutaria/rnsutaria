@@ -35,10 +35,10 @@ public class SanityTests extends BaseTest {
 	}*/
 
 	@Test
-	public void QT_RAQ_TC_012() throws Throwable {
+	public void PM_PP_TC_033() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
-		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
-		requestQuotePage.validatealertErrormessagewhenMoreThanOneMeterisSelected();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
 	}
 }
